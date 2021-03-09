@@ -1,0 +1,21 @@
+name: Manual Workflow - Game engine build 
+on: workflow_dispatch
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: checkout sources 
+        uses: actions/checkout@v2
+
+      - name: Install yarn
+        uses: borales/actions-yarn@v2.0.0
+
+      - name: test
+        run: |
+          yarn install
+          yarn build 
+          yarn test
+        working-directory: ./server
