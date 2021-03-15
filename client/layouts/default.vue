@@ -1,54 +1,44 @@
 <template>
   <div>
-    <nav
-      class="navbar header has-shadow is-primary"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a
-          class="navbar-item"
-          href="/"
-        >
-          <img
-            src="~assets/buefy.png"
-            alt="Buefy"
-            height="28"
-          >
-        </a>
+    <b-navbar>
+      <template #brand>
+        <b-navbar-item tag="router-link" :to="{ path: '/' }">
+          <h1 class='navbar-title'>Cinemator</h1>
+        </b-navbar-item>
+      </template>
+      <template #start>
+        <b-navbar-item href="#">
+          Home
+        </b-navbar-item>
+        <b-navbar-item href="#">
+          Documentation
+        </b-navbar-item>
+        <b-navbar-dropdown label="Info">
+          <b-navbar-item href="#">
+            About
+          </b-navbar-item>
+          <b-navbar-item href="#">
+            Contact
+          </b-navbar-item>
+        </b-navbar-dropdown>
+      </template>
 
-        <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-    </nav>
-
-    <section class="main-content columns">
-      <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li
-            v-for="(item, key) of items"
-            :key="key"
-          >
-            <nuxt-link
-              :to="item.to"
-              exact-active-class="is-active"
-            >
-              <b-icon :icon="item.icon" /> {{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
-      </aside>
-
-      <div class="container column is-10">
-        <nuxt />
-      </div>
-    </section>
+      <template #end>
+        <b-navbar-item tag="div">
+          <div class="buttons">
+            <b-navbar-item  class="button is-primary"tag="router-link" :to="{ path: '/sign-up' }">
+              <strong>Sign up</strong>
+            </b-navbar-item>
+            <b-navbar-item  class="button is-light"tag="router-link" :to="{ path: '/login' }">
+              <strong>Sign up</strong>
+            </b-navbar-item>
+          </div>
+        </b-navbar-item>
+      </template>
+    </b-navbar>
+    <div class='content'>
+      <nuxt></nuxt>
+    </div>
   </div>
 </template>
 
@@ -72,3 +62,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+  .navbar-title {
+    padding: 0px 15px;
+    font-size: 25px;
+    font-family: 'Fascinate', cursive;
+  }
+
+
+</style>
