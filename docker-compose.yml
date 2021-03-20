@@ -15,7 +15,7 @@ services:
 
   app:
     image: node:latest
-    container_name: my-app
+    container_name: node
     working_dir: /application
     volumes:
       - .:/application
