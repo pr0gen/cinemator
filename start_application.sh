@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd client && yarn build && yarn start
+cd client && yarn build && yarn dev

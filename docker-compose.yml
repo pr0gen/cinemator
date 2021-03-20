@@ -24,7 +24,7 @@ services:
       - redis
       - mailhog
     ports:
-      - "9000"
+      - "3000:3000"
     entrypoint: ./start_application.sh
     env_file: ./dc.env
     environment:
