@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "here"
+cd client && yarn build && yarn start
