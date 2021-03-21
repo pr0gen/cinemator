@@ -20,3 +20,6 @@ ex: ##Connect to node
 
 exa: ##Connect to node Admin
 	$(DC) exec --user=root app /bin/bash
+
+logs: ##Connect to node Admin
+	$(DC) logs -f
