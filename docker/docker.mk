@@ -15,11 +15,17 @@ upd: ##Start Docker distached
 do: ##Stop Docker
 	$(DC) down
 
-ex: ##Connect to node
-	$(DC) exec --user=www-data app /bin/bash
+ex server: ##Connect to node server
+	$(DC) exec --user=www-data appServer /bin/bash
 
-exa: ##Connect to node Admin
+exa server: ##Connect to node server Admin
 	$(DC) exec --user=root app /bin/bash
+
+ex server: ##Connect to node client
+	$(DC) exec --user=www-data appClient /bin/bash
+
+exa server: ##Connect to node client  Admin
+	$(DC) exec --user=root appClient /bin/bash
 
 logs: ##Connect to node Admin
 	$(DC) logs -f
