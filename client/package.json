@@ -15,5 +15,11 @@
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "fibers": "^5.0.0",
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "sass": "^1.32.8",
+    "sass-loader": "10"
+  }
 }
