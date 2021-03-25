@@ -1,0 +1,66 @@
+version: "3.1"
+services:
+  appServer:
+    image: node:latest
+    container_name: nodeServer
+    working_dir: /app
+    networks:
+      - default
+    volumes:
+      - ./server:/app
+    ports:
+      - "3000:3000"
+    entrypoint: /bin/bash -c "yarn && yarn run start:dev"
+    env_file: docker/sql.env
+    environment:
+      "NODE_ENV": "development"
+
+  appClient:
+    image: node:latest
+    container_name: nodeClient
+    working_dir: /app
+    networks:
+      - default
+    volumes:
+      - ./client:/app
+    ports:
+      - "3001:3001"
+    entrypoint: /bin/bash -c "yarn && yarn run dev"
+    env_file: docker/sql.env
+    environment:
+      "NODE_ENV": "development"
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./data/db:/var/lib/mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - default
+    env_file: docker/sql.env
+    environment:
+      "MYSQL_DATABASE": "${DB_DATABASE}"
+      "MYSQL_ROOT_PASSWORD": "${DB_PASSWORD}"
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - default
+    ports:
+      - "6379:6379"
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    networks:
+      - default
+    ports:
+      - "1025"
+      - "8025:8025"
+
+networks:
+  default:
