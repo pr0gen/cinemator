@@ -1,5 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ImdbService } from './imdb.service';
+import { SearchResult } from './dto';
 
 @Controller('imdb')
 export class ImdbController {
@@ -7,7 +8,7 @@ export class ImdbController {
   constructor(private imdbService: ImdbService) {}
 
   @Get('search')
-  findOne(@Query('name') name: string): any {
+  async findOne(@Query('name') name: string): Promise<SearchResult | Error> {
      return this.imdbService.search_by_name(name)
       .toPromise()
       .then(res => res.data)
@@ -15,7 +16,7 @@ export class ImdbController {
   }
 
   @Get('search-all')
-  search_all(@Query('expression') expression: string): any {
+  async search_all(@Query('expression') expression: string): Promise<SearchResult | Error> {
      return this.imdbService.search_all_by_expression(expression)
       .toPromise()
       .then(res => res.data)

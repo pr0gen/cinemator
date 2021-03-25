@@ -6,3 +6,6 @@ const API = "/API/";
 export const BASIC_SEARCH = BASE_URL + LANG + API + "Search/";
 export const ALL_SEARCH = BASE_URL + LANG + API + "SearchAll/";
 
+// Title path
+export const TITLE_PATH =  BASE_URL + LANG + API + "Title/";
+
