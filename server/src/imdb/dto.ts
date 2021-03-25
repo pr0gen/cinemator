@@ -6,9 +6,21 @@ export interface SearchResult {
 }
 
 export interface Movie {
-		id: string;
+		id: number;
     resultType: string;
     image: string;
     title: string;
     description: string;
 }
+
+export interface Title {
+  id: number,
+  title: string,
+  originalTitle: string,
+  fullTitle: string,
+  type: string,
+  year: number,
+
+
+}
+
