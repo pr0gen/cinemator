@@ -5,9 +5,10 @@ import { AppService } from './app.service';
 import { ImdbModule } from './imdb/imdb.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { TheMovieDbModule } from './the-movie-db/the-movie-db.module';
 
 @Module({
-  imports: [ConfigModule, ImdbModule, AuthModule],
+  imports: [ConfigModule, ImdbModule, AuthModule, TheMovieDbModule],
   controllers: [AppController],
   providers: [AppService, AuthService],
 })
