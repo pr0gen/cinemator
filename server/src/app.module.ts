@@ -5,9 +5,11 @@ import { AppService } from './app.service';
 import { ImdbModule } from './imdb/imdb.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 
 @Module({
-  imports: [ConfigModule, ImdbModule, AuthModule],
+  imports: [ConfigModule, ImdbModule, AuthModule, TypeOrmModule.forRoot()],
   controllers: [AppController],
   providers: [AppService, AuthService],
 })
