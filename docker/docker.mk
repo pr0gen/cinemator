@@ -27,5 +27,8 @@ ex-client: ##Connect to node client
 exa-client: ##Connect to node client  Admin
 	$(DC) exec --user=root appClient /bin/bash
 
+mysql :
+	$(DC) exec --user=root mysql /bin/bash
+
 logs: ##Connect to node Admin
 	$(DC) logs -f
