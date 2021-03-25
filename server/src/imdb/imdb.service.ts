@@ -19,12 +19,12 @@ constructor(
 
   search_by_name(name: string): Observable<AxiosResponse<SearchResult>> {
       return this.httpService
-        .get(ApiConstant.BASIC_SEARCH + this.connection.api_key + '/' + name);
+        .get(ApiConstant.BASIC_SEARCH + this.connection.api_key_imdb + '/' + name);
   }
 
   search_all_by_expression(expression: string): Observable<AxiosResponse<SearchResult>> {
       return this.httpService
-        .get(ApiConstant.ALL_SEARCH + this.connection.api_key + '/' + expression);
+        .get(ApiConstant.ALL_SEARCH + this.connection.api_key_imdb + '/' + expression);
   }
 
   // title_search(): Observable<AxiosResponse<>> {
