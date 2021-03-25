@@ -17,9 +17,14 @@ constructor(
         this.connection = authService.get_connection();
     }
 
-  search_by_expression(expression: string): Observable<AxiosResponse<SearchResult>> {
+  search_by_name(name: string): Observable<AxiosResponse<SearchResult>> {
       return this.httpService
-        .get(ApiConstant.BASIC_SEARCH + this.connection.api_key + '/' + expression);
+        .get(ApiConstant.BASIC_SEARCH + this.connection.api_key + '/' + name);
+  }
+
+  search_all_by_expression(expression: string): Observable<AxiosResponse<SearchResult>> {
+      return this.httpService
+        .get(ApiConstant.ALL_SEARCH + this.connection.api_key + '/' + expression);
   }
 
 }
