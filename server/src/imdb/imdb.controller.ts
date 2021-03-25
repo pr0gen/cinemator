@@ -8,7 +8,6 @@ export class ImdbController {
   constructor(private imdbService: ImdbService) {}
 
   @Get('search')
-
   async findOne(@Query('name') name: string): Promise<SearchResult | Error> {
      return this.imdbService.search_by_name(name)
       .toPromise()
