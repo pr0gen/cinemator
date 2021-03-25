@@ -1,6 +1,5 @@
-import {Controller, Get, Query} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
-import {SearchResult} from "../imdb/dto";
 
 @Controller('users')
 export class UsersController {
