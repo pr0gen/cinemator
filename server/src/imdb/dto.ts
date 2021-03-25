@@ -6,6 +6,7 @@ export interface SearchResult {
 }
 
 export interface Movie {
+
 		id: number;
     resultType: string;
     image: string;

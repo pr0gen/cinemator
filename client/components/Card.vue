@@ -1,42 +1,53 @@
 <template>
-  <div class="column">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title has-text-grey">
-          {{ title }}
+  <article class='media'>
+    <figure class='media-left'>
+      <p class='image is-64x64'>
+        <b-skeleton v-if='!active' width='64px' height='64px'></b-skeleton>
+        <img v-else :src='image' alt='movie image'>
+      </p>
+    </figure>
+
+    <div class='media-content'>
+
+      <div class='content'>
+        <p v-if='!active'>
+          <b-skeleton active></b-skeleton>
+          <b-skeleton height='80px'></b-skeleton>
         </p>
-      </header>
-      <div class="card-content">
-        <div class="content has-text-centered">
-          <b-icon
-            :icon="icon"
-            size="is-large"
-            type="is-primary"
-          />
-        </div>
+        <span v-else>
+          <p>{{ title }}</p>
+          <p>{{ description }}</p>
+        </span>
+
       </div>
-      <footer class="card-footer">
-        <div class="card-footer-item">
-          <span>
-            <slot />
-          </span>
-        </div>
-      </footer>
+
+      <!--      <nav class='level is-mobile'>-->
+      <!--        <div class='level-left'>-->
+      <!--          <a class='level-item'>-->
+      <!--            <span class='icon is-small'>-->
+      <!--              <b-skeleton></b-skeleton>-->
+      <!--            </span>-->
+      <!--          </a>-->
+      <!--          <a class='level-item'>-->
+      <!--            <span class='icon is-small'>-->
+      <!--              <b-skeleton></b-skeleton>-->
+      <!--            </span>-->
+      <!--          </a>-->
+      <!--        </div>-->
+      <!--      </nav>-->
+
     </div>
-  </div>
+  </article>
+
 </template>
 
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      required: true
-    },
-    icon: {
-      type: String,
-      required: true
-    }
-  }
-}
+    active: Boolean,
+    title: String,
+    description: String,
+    image: String,
+  },
+};
 </script>
