@@ -6,8 +6,14 @@ API_KEY={your_key} # from imdb
 
 # API path
 
-### Searching for a film by expressions
+
+### Searching for a film by name
+```
+localhost:3000/imdb/search?name={name}
+```
+
+### Searching for a film by expressions (all imdb search features)
 
 ```
-localhost:3000/imdb/search?name={expression}
+localhost:3000/imdb/search-all?expression={expression}
 ```
