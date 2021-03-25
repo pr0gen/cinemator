@@ -3,6 +3,7 @@
 
 ##Start project
 ###Requirements
+- Docker
 - Docker-compose
 
 ###Run projects
@@ -29,3 +30,11 @@ http://localhost:3001/
 server (URL) : 
 ```
 http://localhost:3000/
+```
+
+###Some commands
+Connect to docker app container : 
+```Make ex```
+
+as ROOT : 
+```Make exa```
