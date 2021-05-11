@@ -12,14 +12,14 @@
       </b-input>
     </b-field>
 
-
     <Card
       :active="active"
       v-for="movie in movies"
       :key="movie.id"
-      :title='movie.title'
-      :description='movie.description'
-      :image='movie.image'
+      :id="movie.id"
+      :title='movie.original_title'
+      :description='movie.overview'
+      :image='movie.poster_path'
     >
 
     </Card>
@@ -34,14 +34,14 @@ export default {
   name: 'HomePage',
 
   async asyncData({ $axios }) {
-    const movies = await $axios.$get('http://localhost:3000/imdb/search?name=avenger')
+    const movies = await $axios.$get('http://localhost:3000/the-movie-db/search?expression=avenger')
     return { movies: movies.results }
   },
 
   methods: {
     async search() {
       this.active = false
-      const {data : movies} = await this.$axios.get(`http://localhost:3000/imdb/search?name=${this.searchValue}`)
+      const {data : movies} = await this.$axios.get(`http://localhost:3000/the-movie-db/search?expression=${this.searchValue}`)
       this.movies = movies.results
       this.active = true
     }

@@ -10,8 +10,10 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 
+
 @Module({
   imports: [TypeOrmModule.forRoot(),ConfigModule, ImdbModule, AuthModule, TheMovieDbModule, UsersModule],
+
   controllers: [AppController],
   providers: [AppService, AuthService],
 })

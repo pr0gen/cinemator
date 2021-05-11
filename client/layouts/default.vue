@@ -26,10 +26,10 @@
       <template #end>
         <b-navbar-item tag="div">
           <div class="buttons">
-            <b-navbar-item  class="button is-primary"tag="router-link" :to="{ path: '/sign-up' }">
-              <strong>Sign up</strong>
-            </b-navbar-item>
             <b-navbar-item  class="button is-light"tag="router-link" :to="{ path: '/login' }">
+              <strong>Login</strong>
+            </b-navbar-item>
+            <b-navbar-item  class="button is-primary"tag="router-link" :to="{ path: '/sign-up' }">
               <strong>Sign up</strong>
             </b-navbar-item>
           </div>

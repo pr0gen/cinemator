@@ -18,6 +18,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/scss/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -39,7 +40,22 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/auth-next'
   ],
+
+  // auth: {
+  //   strategies: {
+  //     'nestjs-auth':{
+  //       provider : 'nestjs',
+  //       url : 'https://localhost:3000',
+  //       endpoints : {
+  //         login : {
+  //           url : '/api/login',
+  //         }
+  //       }
+  //     }
+  //   }
+  // },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
@@ -54,4 +70,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
+
+
 }
