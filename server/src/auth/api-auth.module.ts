@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AuthService } from './auth.service';
+import { ApiAuthService } from './api-auth.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  providers: [AuthService]
+  providers: [ApiAuthService]
 
 })
-export class AuthModule {}
+export class ApiAuthModule {}

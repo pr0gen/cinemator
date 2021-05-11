@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios'
 import { SearchResult } from './dto';
 import { Connection } from './connection';
 import * as ApiConstant from './constants';
-import { AuthService } from '../auth/auth.service';
+import { ApiAuthService } from 'src/auth/api-auth.service';
 
 @Injectable()
 export class ImdbService {
@@ -12,7 +12,7 @@ export class ImdbService {
     private connection: Connection
 constructor(
     private httpService: HttpService,
-    authService: AuthService,
+    authService: ApiAuthService,
   ) {
         this.connection = authService.get_connection();
     }

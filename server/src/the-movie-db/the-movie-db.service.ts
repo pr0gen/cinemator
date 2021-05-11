@@ -2,9 +2,9 @@ import { HttpService, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { AxiosResponse } from 'axios'
 import { Connection } from '../imdb/connection';
-import { AuthService } from '../auth/auth.service';
 import * as ApiConstant from './constants';
 import { SearchResult } from './dto';
+import { ApiAuthService } from 'src/auth/api-auth.service';
 
 @Injectable()
 export class TheMovieDbService {
@@ -12,7 +12,7 @@ export class TheMovieDbService {
     private connection: Connection;
 constructor(
     private httpService: HttpService,
-    authService: AuthService,
+    authService: ApiAuthService,
   ) {
         this.connection = authService.get_connection();
     }
