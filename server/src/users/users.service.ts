@@ -1,36 +1,16 @@
 import {CacheInterceptor, CacheTTL, Injectable, UseInterceptors} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
+import { InputUser, User } from './user.entity';
 
 @Injectable()
 export class UsersService {
-
-  private readonly users = [
-      {
-        id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        password: 'changeme',
-        isActive: true,
-      },
-      {
-        id: 2,
-        firstName: 'Maria',
-        lastName: 'Dae',
-        password: 'guess',
-        isActive: true,
-      },
-    ];
 
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) {}
 
-  async fakeFindOne(username: string): Promise<User | undefined> {
-    return this.users.find(user => user.firstName === username);
-  }
 
   @UseInterceptors(CacheInterceptor)
   @CacheTTL(30)
@@ -38,8 +18,19 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<User> {
-    return this.usersRepository.findOne(id);
+  findOne(username: string): Promise<User> {
+    return User.findByName(username); 
+  }
+
+  async createOne(inputUser: InputUser): Promise<User> {
+    let user = { 
+      id: 1,
+      firstName: inputUser.firstName,
+      lastName: inputUser.lastName,
+      password: inputUser.password,
+      isActive: false
+    };
+    return this.usersRepository.save(user);
   }
 
   async remove(id: string): Promise<void> {
