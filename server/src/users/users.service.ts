@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {CacheInterceptor, CacheTTL, Injectable, UseInterceptors} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
@@ -32,6 +32,8 @@ export class UsersService {
     return this.users.find(user => user.firstName === username);
   }
 
+  @UseInterceptors(CacheInterceptor)
+  @CacheTTL(30)
   findAll(): Promise<User[]> {
     return this.usersRepository.find();
   }
