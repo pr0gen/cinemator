@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Connection } from 'src/imdb/connection';
+import { Connection } from '../the-movie-db/connection';
 
 @Injectable()
 export class ApiAuthService {

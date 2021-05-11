@@ -1,10 +1,10 @@
 import { HttpService, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { AxiosResponse } from 'axios'
-import { Connection } from '../imdb/connection';
+import { Connection } from '../the-movie-db/connection';
 import * as ApiConstant from './constants';
 import { SearchResult } from './dto';
-import { ApiAuthService } from 'src/api-auth/api-auth.service';
+import { ApiAuthService } from '../api-auth/api-auth.service';
 
 @Injectable()
 export class TheMovieDbService {
