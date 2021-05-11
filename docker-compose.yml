@@ -42,8 +42,8 @@ services:
       - default
     env_file: docker/sql.env
     environment:
-      "MYSQL_DATABASE": "${DB_DATABASE}"
-      "MYSQL_ROOT_PASSWORD": "${DB_PASSWORD}"
+      "MYSQL_DATABASE": "cinemator"
+      "MYSQL_ROOT_PASSWORD": "root"
 
   redis:
     image: redis:alpine

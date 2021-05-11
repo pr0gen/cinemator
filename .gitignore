@@ -2,3 +2,5 @@
 .idea/
 
 server/dist/
+
+data/
