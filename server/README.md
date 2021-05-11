@@ -1,7 +1,7 @@
 # Getting started
 Create a .env file with 
 ```
-API_KEY={your_key} # from imdb
+API_KEY_THE_MOVIE_DB={key}
 ```
 
 # API path
@@ -21,11 +21,16 @@ http://localhost:3000/auth/login
 localhost:3000/the-movie-db/search?expression=avenger
 ```
 
-## Deprecated
+### Retrieving lang details for a film
+
 ```
-localhost:3000/imdb/search?name={name}
+localhost:3000/the-movie-db/lang-details?id=47369
 ```
-#### Searching for a film by expressions (all imdb search features)
+
+### Find movie details
+
 ```
-localhost:3000/imdb/search-all?expression={expression}
+localhost:3000/the-movie-db/find-movie-details?id=47369
 ```
+
+
