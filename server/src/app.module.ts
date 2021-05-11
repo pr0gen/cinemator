@@ -9,9 +9,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { ApiAuthService } from './api-auth/api-auth.service';
 import { ApiAuthModule } from './api-auth/api-auth.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(),ConfigModule, ImdbModule, ApiAuthModule, TheMovieDbModule, UsersModule],
+  imports: [TypeOrmModule.forRoot(),ConfigModule, ImdbModule, ApiAuthModule, TheMovieDbModule, UsersModule, AuthModule],
   controllers: [AppController],
   providers: [AppService, ApiAuthService],
 })
