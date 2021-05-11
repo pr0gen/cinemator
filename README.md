@@ -1,15 +1,15 @@
 
 # Cinemator
 
-##Start project
-###Requirements
+## Start project
+### Requirements
 - Docker
 - Docker-compose
 
 1. Make sure you follow [docker installation](https://docs.docker.com/engine/install/linux-postinstall/) to not have permission problems
 2. Make sure you don't run docker with sudo 
 
-###Run projects
+### Run projects
 - Start docker : 
 ```
 make up
@@ -25,7 +25,7 @@ make upd
 127.0.0.1	localhost
 ```
 
-###Project access
+### Project access
 Project might be running now, so you have access to front (client) on :
 ```
 http://localhost:3001/
@@ -35,7 +35,7 @@ server (URL) :
 http://localhost:3000/
 ```
 
-###Some commands
+### Some commands
 Connect to docker appServer container : 
 ```Make ex server```
 
