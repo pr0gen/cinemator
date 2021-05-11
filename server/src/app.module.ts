@@ -7,8 +7,8 @@ import { TheMovieDbModule } from './the-movie-db/the-movie-db.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
-import { ApiAuthService } from './auth/api-auth.service';
-import { ApiAuthModule } from './auth/api-auth.module';
+import { ApiAuthService } from './api-auth/api-auth.service';
+import { ApiAuthModule } from './api-auth/api-auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(),ConfigModule, ImdbModule, ApiAuthModule, TheMovieDbModule, UsersModule],

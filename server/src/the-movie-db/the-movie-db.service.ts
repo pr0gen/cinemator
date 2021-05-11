@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios'
 import { Connection } from '../imdb/connection';
 import * as ApiConstant from './constants';
 import { SearchResult } from './dto';
-import { ApiAuthService } from 'src/auth/api-auth.service';
+import { ApiAuthService } from 'src/api-auth/api-auth.service';
 
 @Injectable()
 export class TheMovieDbService {

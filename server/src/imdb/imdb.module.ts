@@ -1,6 +1,6 @@
 import { HttpModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ApiAuthService } from 'src/auth/api-auth.service';
+import { ApiAuthService } from 'src/api-auth/api-auth.service';
 import { ImdbController } from './imdb.controller';
 import { ImdbService } from './imdb.service';
 
