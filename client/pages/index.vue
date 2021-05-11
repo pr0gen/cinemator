@@ -33,15 +33,15 @@ import Card from '~/components/Card';
 export default {
   name: 'HomePage',
 
-  async asyncData({ $axios }) {
+  async asyncData({$axios}) {
     const movies = await $axios.$get('http://localhost:3000/the-movie-db/search?expression=avenger')
-    return { movies: movies.results }
+    return {movies: movies.results}
   },
 
   methods: {
     async search() {
       this.active = false
-      const {data : movies} = await this.$axios.get(`http://localhost:3000/the-movie-db/search?expression=${this.searchValue}`)
+      const {data: movies} = await this.$axios.get(`http://localhost:3000/the-movie-db/search?expression=${this.searchValue}`)
       this.movies = movies.results
       this.active = true
     }
@@ -54,7 +54,7 @@ export default {
     return {
       movies: [],
       active: true,
-      searchValue : '',
+      searchValue: '',
     };
   },
 };

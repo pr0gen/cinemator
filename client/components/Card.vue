@@ -21,21 +21,6 @@
 
       </div>
 
-<!--            <nav class='level is-mobile'>-->
-<!--              <div class='level-left'>-->
-<!--                <a class='level-item'>-->
-<!--                  <span class='icon is-small'>-->
-<!--                    <b-skeleton></b-skeleton>-->
-<!--                  </span>-->
-<!--                </a>-->
-<!--                <a class='level-item'>-->
-<!--                  <span class='icon is-small'>-->
-<!--                    <b-skeleton></b-skeleton>-->
-<!--                  </span>-->
-<!--                </a>-->
-<!--              </div>-->
-<!--            </nav>-->
-
     </div>
   </article>
 
@@ -67,6 +52,7 @@ export default {
   .media:hover {
     background-color: #e6e6e6;
     border-radius: 5px;
+    cursor: pointer ;
   }
   .media {
     padding: 10px;
