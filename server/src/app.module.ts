@@ -11,6 +11,7 @@ import { ApiAuthService } from './api-auth/api-auth.service';
 import { ApiAuthModule } from './api-auth/api-auth.module';
 import { AuthModule } from './auth/auth.module';
 
+
 @Module({
   imports: [TypeOrmModule.forRoot(),ConfigModule, ImdbModule, ApiAuthModule, TheMovieDbModule, UsersModule, AuthModule],
   controllers: [AppController],

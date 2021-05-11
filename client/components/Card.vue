@@ -1,9 +1,9 @@
 <template>
-  <article class='media'>
+  <article class='media' @click='show'>
     <figure class='media-left'>
       <p class='image is-64x64'>
         <b-skeleton v-if='!active' width='64px' height='64px'></b-skeleton>
-        <img v-else :src='image' alt='movie image'>
+        <img v-else :src='image ? "https://image.tmdb.org/t/p/original/"+image : ""' alt='movie image'>
       </p>
     </figure>
 
@@ -21,20 +21,20 @@
 
       </div>
 
-      <!--      <nav class='level is-mobile'>-->
-      <!--        <div class='level-left'>-->
-      <!--          <a class='level-item'>-->
-      <!--            <span class='icon is-small'>-->
-      <!--              <b-skeleton></b-skeleton>-->
-      <!--            </span>-->
-      <!--          </a>-->
-      <!--          <a class='level-item'>-->
-      <!--            <span class='icon is-small'>-->
-      <!--              <b-skeleton></b-skeleton>-->
-      <!--            </span>-->
-      <!--          </a>-->
-      <!--        </div>-->
-      <!--      </nav>-->
+<!--            <nav class='level is-mobile'>-->
+<!--              <div class='level-left'>-->
+<!--                <a class='level-item'>-->
+<!--                  <span class='icon is-small'>-->
+<!--                    <b-skeleton></b-skeleton>-->
+<!--                  </span>-->
+<!--                </a>-->
+<!--                <a class='level-item'>-->
+<!--                  <span class='icon is-small'>-->
+<!--                    <b-skeleton></b-skeleton>-->
+<!--                  </span>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </nav>-->
 
     </div>
   </article>
@@ -44,10 +44,32 @@
 <script>
 export default {
   props: {
+    key: Number,
+    id: Number,
     active: Boolean,
     title: String,
     description: String,
     image: String,
   },
+
+  methods: {
+    show(){
+      this.$router.push({path: '/' + this.id })
+      console.log('click movie');
+    }
+  }
+
 };
 </script>
+
+<style scoped>
+
+  .media:hover {
+    background-color: #e6e6e6;
+    border-radius: 5px;
+  }
+  .media {
+    padding: 10px;
+  }
+
+</style>
