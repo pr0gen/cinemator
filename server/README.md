@@ -6,6 +6,15 @@ API_KEY={your_key} # from imdb
 
 # API path
 
+### Login 
+```
+http://localhost:3000/auth/login
+{
+  "username": "John",
+  "password": "changeme"
+}
+```
+
 ### Searching for a film by name
 
 ```
