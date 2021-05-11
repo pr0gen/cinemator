@@ -15,7 +15,7 @@ constructor(
     }
 
     @UseInterceptors(CacheInterceptor)
-    @CacheTTL(10)
+    @CacheTTL(30)
     async search_by_expression(expression: string): Promise<SearchResult | Error> {
           return this.httpService
               .get(ApiConstant.BASIC_SEARCH + this.connection.api_key_the_movie_db + ApiConstant.QUERY + expression)
@@ -25,7 +25,7 @@ constructor(
       }
 
     @UseInterceptors(CacheInterceptor)
-    @CacheTTL(10)
+    @CacheTTL(30)
     async lang_details(id: number): Promise<string[] | Error> {
         return this.httpService
             .get(
@@ -41,7 +41,7 @@ constructor(
     }
 
     @UseInterceptors(CacheInterceptor)
-    @CacheTTL(10)
+    @CacheTTL(30)
     async find_movie_details(id: number): Promise<MovieDetails | Error> {
             console.log(ApiConstant.MOVIE_DETAILS + id + '/' + ApiConstant.API_KEY_PATH
             + this.connection.api_key_the_movie_db + ApiConstant.LANG + "en-US");
