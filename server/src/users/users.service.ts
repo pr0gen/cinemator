@@ -24,7 +24,7 @@ export class UsersService {
 
   async createOne(inputUser: InputUser): Promise<User> {
     let user = { 
-      id: 1,
+      id: 1, // TODO not sure of that
       firstName: inputUser.firstName,
       lastName: inputUser.lastName,
       password: inputUser.password,

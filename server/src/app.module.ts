@@ -8,10 +8,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiAuthService } from './api-auth/api-auth.service';
 import { ApiAuthModule } from './api-auth/api-auth.module';
 import { AuthModule } from './auth/auth.module';
+import { BookmarkModule } from './bookmark/bookmark.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(),ConfigModule, ApiAuthModule, TheMovieDbModule, UsersModule, AuthModule],
+  imports: [TypeOrmModule.forRoot(),ConfigModule, ApiAuthModule, TheMovieDbModule, UsersModule, AuthModule, BookmarkModule],
   controllers: [AppController],
   providers: [AppService, ApiAuthService],
 })
