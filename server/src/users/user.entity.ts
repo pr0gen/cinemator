@@ -1,4 +1,4 @@
-import { Bookmark } from 'src/bookmark/bookmark.entity';
+import { Bookmark } from '../bookmark/bookmark.entity';
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 
