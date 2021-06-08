@@ -1,4 +1,5 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Bookmark } from '../bookmark/bookmark.entity';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 
 export interface InputUser {
@@ -27,8 +28,18 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
-  @Column({ default: true })
+  @Column({ default: false })
   isActive: boolean;
+
+  @Column({ type: "timestamp", default: () => "now()" })
+  updated_at: Date;
+
+  @Column({ type: 'timestamp', default: () => "now()" })
+  created_at: Date;
+
+  @OneToMany(type => Bookmark, bookmark => bookmark.owner) 
+  bookmarks: Bookmark[];
+
 
   static findByName(firstName: string): Promise<User> {
         return this.createQueryBuilder("user")
@@ -36,3 +47,4 @@ export class User extends BaseEntity {
             .getOne();
     }
 }
+
