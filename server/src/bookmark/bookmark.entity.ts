@@ -20,7 +20,7 @@ export class Bookmark extends BaseEntity {
   @Column({ type: 'timestamp'})
   date: Date;
 
-  static findByOwner(owner: string): Promise<Bookmark[]> {
+  static findByOwner(owner: number): Promise<Bookmark[]> {
         return this.createQueryBuilder("bookmark")
             .where("bookmark.owner = :owner", { owner })
             .getMany()
