@@ -38,9 +38,24 @@ localhost:3000/the-movie-db/find-movie-details?id=47369
 ```
 localhost:3000/users/create
 {
-  "firstName": "John";
-  "lastName": "Doe";
+  "firstName": "John",
+  "lastName": "Doe",
   "password": "changeme"
 }
 
+```
+
+### Create bookmark
+```
+localhost:3000/bookmark/create
+{
+  "name": "avenger",
+  "owner": "Tigran"
+}
+
+```
+
+### Get bookmarks for user
+```
+localhost:3000/bookmark/owner?owner=Tigran
 ```

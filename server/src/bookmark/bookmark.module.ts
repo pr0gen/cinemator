@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { BookmarkService } from './bookmark.service';
 import { BookmarkController } from './bookmark.controller';
 import { Bookmark } from './bookmark.entity';
+import { UsersModule } from '../users/users.module';
 
 @Module({
 
@@ -13,6 +14,7 @@ import { Bookmark } from './bookmark.entity';
     TypeOrmModule.forFeature([Bookmark]),
     CacheModule.register(),
     ConfigModule.forRoot(),
+    UsersModule
   ],
   providers: [
     BookmarkService,

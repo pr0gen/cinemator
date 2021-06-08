@@ -23,14 +23,12 @@ export class UsersService {
   }
 
   async createOne(inputUser: InputUser): Promise<User> {
-    let user = { 
-      id: 1, // TODO not sure of that
+    return this.usersRepository.save({ 
       firstName: inputUser.firstName,
       lastName: inputUser.lastName,
       password: inputUser.password,
       isActive: false
-    };
-    return this.usersRepository.save(user);
+    });
   }
 
   async remove(id: string): Promise<void> {

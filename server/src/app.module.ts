@@ -12,9 +12,20 @@ import { BookmarkModule } from './bookmark/bookmark.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(),ConfigModule, ApiAuthModule, TheMovieDbModule, UsersModule, AuthModule, BookmarkModule],
+  imports: [
+    TypeOrmModule.forRoot(),
+    ConfigModule,
+    ApiAuthModule,
+    TheMovieDbModule,
+    UsersModule,
+    AuthModule,
+    BookmarkModule
+  ],
   controllers: [AppController],
-  providers: [AppService, ApiAuthService],
+  providers: [
+    AppService,
+    ApiAuthService
+  ],
 })
 export class AppModule {
   constructor() {}

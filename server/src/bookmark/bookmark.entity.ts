@@ -1,4 +1,10 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../users/user.entity';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+
+export interface InputBookmark {
+  name: string;
+  owner: string;
+}
 
 @Entity()
 export class Bookmark extends BaseEntity {
@@ -8,14 +14,11 @@ export class Bookmark extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
-  lastName: string;
+  @ManyToOne(type => User, user => user.bookmarks)
+  owner: number;
 
-  @Column()
-  owner: string;
-
-  @Column()
-  date: string;
+  @Column({ type: 'timestamp'})
+  date: Date;
 
   static findByOwner(owner: string): Promise<Bookmark[]> {
         return this.createQueryBuilder("bookmark")
