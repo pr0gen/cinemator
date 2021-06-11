@@ -19,6 +19,14 @@ If you want detached mode: Run containers in the background :
 ```
 make upd
 ```
+
+- Import our sql script to have some test data into the project
+
+```
+docker-compose exec -T mysql  mysql -uroot -proot cinemator < test_data.sql
+```
+
+
 - Make sure you have this on your ```/etc/hosts``` file
 
 ```
