@@ -21,14 +21,14 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     }
 
     return { 
-      firstName: user.firstName,
-      lastName: user.lastName,
+      username: user.username,
+      email: user.email,
       token: this.generate_token(user)
     };
   }
 
   generate_token(user: User): string {
-    const payload = { username: user.firstName, sub: user.id};
+    const payload = { username: user.username, sub: user.id};
     return this.jwtService.sign(payload);
   }
 }

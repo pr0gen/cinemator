@@ -5,8 +5,8 @@ create table user
 (
     id         int auto_increment
         primary key,
-    firstName  varchar(255)                        not null,
-    lastName   varchar(255)                        not null,
+    username  varchar(255)                        not null,
+    email   varchar(255)                        not null,
     password   varchar(255)                        not null,
     isActive   tinyint   default 0                 not null,
     updated_at timestamp default CURRENT_TIMESTAMP not null,
@@ -24,13 +24,13 @@ create table bookmark
         foreign key (ownerId) references user (id)
 );
 
-INSERT INTO user (firstName, lastName, password)
+INSERT INTO user (username, email, password)
 VALUES ('Tigran', 'Rolfie', 'password');
-INSERT INTO user (firstName, lastName, password)
+INSERT INTO user (username, email, password)
 VALUES ('Quentin', 'Bragg', 'password');
-INSERT INTO user (firstName, lastName, password)
+INSERT INTO user (username, email, password)
 VALUES ('Arthur', 'Arthur', 'password');
-INSERT INTO user (firstName, lastName, password)
+INSERT INTO user (username, email, password)
 VALUES ('Clement', 'Hao Fire Spirit', 'password');
 
 INSERT INTO bookmark(name, ownerId)

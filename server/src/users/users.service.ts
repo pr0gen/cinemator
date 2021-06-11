@@ -24,8 +24,8 @@ export class UsersService {
 
   async createOne(inputUser: InputUser): Promise<User> {
     return this.usersRepository.save({ 
-      firstName: inputUser.firstName,
-      lastName: inputUser.lastName,
+      username: inputUser.username,
+      email: inputUser.email,
       password: inputUser.password,
       isActive: false
     });

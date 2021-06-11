@@ -3,14 +3,14 @@ import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany } from 't
 
 
 export interface InputUser {
-    firstName: string;
-    lastName: string;
+    username: string;
+    email: string;
     password: string;
 }
 
 export class OutputUser {
-    firstName: string;
-    lastName: string;
+    username: string;
+    email: string;
     token: string;
 }
 
@@ -20,10 +20,10 @@ export class User extends BaseEntity {
   id: number;
 
   @Column()
-  firstName: string;
+  username: string;
 
   @Column()
-  lastName: string;
+  email: string;
 
   @Column()
   password: string;
@@ -41,9 +41,9 @@ export class User extends BaseEntity {
   bookmarks: Bookmark[];
 
 
-  static findByName(firstName: string): Promise<User> {
+  static findByName(username: string): Promise<User> {
         return this.createQueryBuilder("user")
-            .where("user.firstName = :firstName", { firstName })
+            .where("user.username = :username", { username })
             .getOne();
     }
 }

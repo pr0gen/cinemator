@@ -38,8 +38,8 @@ localhost:3000/the-movie-db/find-movie-details?id=47369
 ```
 localhost:3000/users/create
 {
-  "firstName": "John",
-  "lastName": "Doe",
+  "username": "John",
+  "email": "Doe",
   "password": "changeme"
 }
 
