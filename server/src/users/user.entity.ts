@@ -9,6 +9,7 @@ export interface InputUser {
 }
 
 export class OutputUser {
+    id: number;
     username: string;
     email: string;
     token: string;
