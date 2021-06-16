@@ -35,6 +35,9 @@
 
         <b-rate :value="movie.vote_average / 2" custom-text="Vote Average"></b-rate>
 
+        <button class="btn-classic" @click="like" v-if="isLoggedIn"> Like </button>
+        <button class="btn-classic" @click="bookmark" v-if="isLoggedIn"> Bookmark </button>
+
       </div>
 
       <div class="column">
@@ -51,16 +54,12 @@
       <p>Description :</p>
       <p>{{ movie.overview }}</p>
     </div>
-
-
-
-
-
-
   </div>
 </template>
 
 <script>
+
+import {mapGetters} from "vuex";
 
 export default {
   name: 'movie-id',
@@ -76,6 +75,10 @@ export default {
       movie: movie,
       images : images
     }
+  },
+
+  computed: {
+    ...mapGetters('authentication', ['isLoggedIn', 'username'])
   },
 
   methods: {
@@ -107,7 +110,18 @@ export default {
     },
     getImgUrl(value) {
       return `https://picsum.photos/id/43${value}/1230/500`
-    }
+    },
+
+    async like() {
+
+    },
+
+    async bookmark() {
+
+      console.log(this.name)
+      console.log(this.username)
+
+    },
   },
 
   // components: {
@@ -133,5 +147,20 @@ export default {
 
   .mb-5 {
     margin-bottom: 12px !important;
+  }
+
+  .btn-classic {
+    width: 80px;
+    background-color: #d4810b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: #d8c8b7 1px solid;
+    margin-right: 20px;
+  }
+
+  .btn-classic:active {
+    background-color: white;
+    color: #d4810b;
   }
 </style>

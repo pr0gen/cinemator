@@ -21,8 +21,8 @@
 
       </div>
 
-      <button class="btn-classic"> Like </button>
-      <button class="btn-classic"> Bookmark </button>
+      <button class="btn-classic" v-if="isLoggedIn"> Like </button>
+      <button class="btn-classic" v-if="isLoggedIn"> Bookmark </button>
 
     </div>
   </article>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   props: {
     key: Number,
@@ -39,6 +41,11 @@ export default {
     description: String,
     image: String,
   },
+
+  computed: {
+    ...mapGetters('authentication', ['isLoggedIn'])
+  },
+
 
   methods: {
     show(){
@@ -66,7 +73,7 @@ export default {
     background-color: #d4810b;
     color: white;
     padding: 4px 10px;
-    border-radius: 5px;
+    border-radius: 3px;
     border: #d8c8b7 1px solid;
     margin-right: 20px;
   }
