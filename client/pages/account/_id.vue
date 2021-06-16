@@ -12,8 +12,7 @@
       {{ error.message}}
     </b-message>
 
-    <b-button type="button is-primary" @click="login">Connexion</b-button>
-
+    <b-button type="button is-primary" @click="updatePassword">Connexion</b-button>
 
     <h1 class="title mt-6">Delete account</h1>
 
@@ -22,17 +21,17 @@
     </div>
 
 
-
-
   </div>
 </template>
 
 <script>
+
+import Swal from 'sweetalert2'
+
 export default {
   name: "account",
   data() {
     return {
-      username: '',
       password: '',
       error: {
         show: false,
@@ -43,11 +42,28 @@ export default {
   methods: {
 
     deleteAccount() {
-      console.log("je delete account")
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it !'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your account has been deleted.',
+            'success'
+          )
+        }
+      })
     },
 
 
     updatePassword() {
+
       if (this.password === '') {
         this.error.show = true
         this.error.message = 'Password can\'t be empty'
@@ -66,8 +82,7 @@ export default {
         this.error.show = true
         this.error.message = "Error"
       }).catch(error => {
-        this.error.show = true
-        this.error.message = "Error"
+
       })
 
 
