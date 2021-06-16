@@ -50,7 +50,7 @@ export default {
         .then((response) => {
           if (response.status === 201) {
             this.$store.dispatch('authentication/loadToken', response.data.token)
-            this.$store.dispatch('authentication/loadId', 5)
+            this.$store.dispatch('authentication/loadId', response.data.id)
             this.$router.push({path: '/'})
             return
           }

@@ -41,26 +41,32 @@ export default {
     }
   },
   methods: {
-    async login() {
-      if (this.username === '' || this.password === '') {
+    async updatePassword() {
+      if (this.password === '') {
         this.error.show = true
-        this.error.message = 'All fields are required.'
+        this.error.message = 'Password can\'t be empty'
         return
       }
 
       const response = await this.$axios.post('http://localhost:3000/auth/login', {
-        "username": this.username,
         "password": this.password
+      }).then(response => {
+        console.log(response)
+        if (response.status === 201) {
+          this.$store.dispatch('authentication/loadToken', response.data.token)
+          this.$router.push({path: '/'})
+          return
+        }
+        this.error.show = true
+        this.error.message = "Error"
+      }).catch(error => {
+        this.error.show = true
+        this.error.message = "Error"
       })
 
 
-      if (response.status === 201) {
-        this.$store.dispatch('authentication/loadToken', response.data.token)
-        this.$router.push({path: '/'})
-        return
-      }
-      this.error.show = true
-      this.error.message = "Error"
+
+
 
     },
   }
