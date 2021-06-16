@@ -42,22 +42,19 @@ export default {
         return
       }
 
-      const data = await this.$axios.post('http://localhost:3000/auth/login', {
+      const response = await this.$axios.post('http://localhost:3000/auth/login', {
         "username": this.username,
         "password": this.password
       })
 
-      if (data.status === 201) {
-          this.$store.dispatch('auth/loadToken', response.token)
-          this.$store.dispatch('auth/loadUsername', response.username)
-          this.$emit('refresh')
+
+      if (response.status === 201) {
+          this.$store.dispatch('authentication/loadToken', response.data.token)
           this.$router.push({path: '/'})
           return
       }
-
-
       this.error.show = true
-      this.error.message = response.error
+      this.error.message = "Error"
 
     },
   }

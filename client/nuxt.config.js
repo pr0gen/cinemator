@@ -24,6 +24,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/nuxt-client-init.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -43,20 +44,6 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/auth-next'
   ],
-
-  // auth: {
-  //   strategies: {
-  //     'nestjs-auth':{
-  //       provider : 'nestjs',
-  //       url : 'https://localhost:3000',
-  //       endpoints : {
-  //         login : {
-  //           url : '/api/login',
-  //         }
-  //       }
-  //     }
-  //   }
-  // },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
