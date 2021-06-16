@@ -1,5 +1,5 @@
 <template>
-  <article class='media' @click='show'>
+  <article class='media' >
     <figure class='media-left'>
       <p class='image is-64x64'>
         <b-skeleton v-if='!active' width='64px' height='64px'></b-skeleton>
@@ -9,7 +9,7 @@
 
     <div class='media-content'>
 
-      <div class='content'>
+      <div class='content' @click='show'>
         <p v-if='!active'>
           <b-skeleton active></b-skeleton>
           <b-skeleton height='80px'></b-skeleton>
@@ -20,6 +20,9 @@
         </span>
 
       </div>
+
+      <button class="btn-classic"> Like </button>
+      <button class="btn-classic"> Bookmark </button>
 
     </div>
   </article>
@@ -56,6 +59,21 @@ export default {
   }
   .media {
     padding: 10px;
+  }
+
+  .btn-classic {
+    width: 80px;
+    background-color: #d4810b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    border: #d8c8b7 1px solid;
+    margin-right: 20px;
+  }
+
+  .btn-classic:active {
+    background-color: white;
+    color: #d4810b;
   }
 
 </style>
