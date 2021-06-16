@@ -18,7 +18,7 @@
     <h1 class="title mt-6">Delete account</h1>
 
     <div class="buttons">
-      <b-button type="is-danger" expanded>Delete</b-button>
+      <b-button type="is-danger" @click="deleteAccount" expanded>Delete</b-button>
     </div>
 
 
@@ -41,14 +41,20 @@ export default {
     }
   },
   methods: {
-    async updatePassword() {
+
+    deleteAccount() {
+      console.log("je delete account")
+    },
+
+
+    updatePassword() {
       if (this.password === '') {
         this.error.show = true
         this.error.message = 'Password can\'t be empty'
         return
       }
 
-      const response = await this.$axios.post('http://localhost:3000/auth/login', {
+      this.$axios.post('http://localhost:3000/auth/login', {
         "password": this.password
       }).then(response => {
         console.log(response)

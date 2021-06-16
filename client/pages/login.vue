@@ -51,6 +51,7 @@ export default {
           if (response.status === 201) {
             this.$store.dispatch('authentication/loadToken', response.data.token)
             this.$store.dispatch('authentication/loadId', response.data.id)
+            this.$store.dispatch('authentication/loadUsername', response.data.username)
             this.$router.push({path: '/'})
             return
           }
