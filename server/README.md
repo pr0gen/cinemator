@@ -8,7 +8,7 @@ API_KEY_THE_MOVIE_DB={key}
 
 ### Login 
 ```
-http://localhost:3000/auth/login
+POST http://localhost:3000/auth/login
 {
   "username": "John",
   "password": "changeme"
@@ -18,25 +18,25 @@ http://localhost:3000/auth/login
 ### Searching for a film by name
 
 ```
-localhost:3000/the-movie-db/search?expression=avenger
+GET localhost:3000/the-movie-db/search?expression=avenger
 ```
 
 ### Retrieving lang details for a film
 
 ```
-localhost:3000/the-movie-db/lang-details?id=47369
+GET localhost:3000/the-movie-db/lang-details?id=47369
 ```
 
 ### Find movie details
 
 ```
-localhost:3000/the-movie-db/find-movie-details?id=47369
+GET localhost:3000/the-movie-db/find-movie-details?id=47369
 ```
 
 ### Create user
 
 ```
-localhost:3000/users/create
+POST localhost:3000/users/create
 {
   "username": "John",
   "email": "Doe",
@@ -47,7 +47,7 @@ localhost:3000/users/create
 
 ### Create bookmark
 ```
-localhost:3000/bookmark/create
+POST localhost:3000/bookmark/create
 {
   "name": "avenger",
   "owner": "Tigran"
@@ -57,5 +57,10 @@ localhost:3000/bookmark/create
 
 ### Get bookmarks for user
 ```
-localhost:3000/bookmark/owner?owner=Tigran
+GET localhost:3000/bookmark/owner?owner=Tigran
+```
+
+### Delete bookmark by filmId 
+```
+DELETE localhost:3000/bookmark?filmId=
 ```

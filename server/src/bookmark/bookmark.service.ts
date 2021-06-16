@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersService } from '../users/users.service';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InputBookmark, Bookmark } from './bookmark.entity';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class BookmarkService {
     return this.userService.findOne(owner)
       .then(user => {
         return Bookmark.findByOwner(user.id); 
-    })
+    });
   }
 
   async createOne(newBookmark: InputBookmark): Promise<Bookmark> {
@@ -35,8 +35,8 @@ export class BookmarkService {
     });
   }
 
-  async remove(id: string): Promise<void> {
-    await this.bookmarkRepository.delete(id);
+  async removeBookmark(filmId: number): Promise<DeleteResult> {
+    return Bookmark.removeBookmark(filmId);
   }
 
 }

@@ -1,5 +1,5 @@
 import { User } from '../users/user.entity';
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, DeleteResult } from 'typeorm';
 
 export interface InputBookmark {
   name: string;
@@ -12,7 +12,7 @@ export class Bookmark extends BaseEntity {
   id: number;
 
   @Column()
-  name: string;
+  filmId: number;
 
   @ManyToOne(type => User, user => user.bookmarks)
   owner: number;
@@ -21,8 +21,15 @@ export class Bookmark extends BaseEntity {
   date: Date;
 
   static findByOwner(owner: number): Promise<Bookmark[]> {
-        return this.createQueryBuilder("bookmark")
-            .where("bookmark.owner = :owner", { owner })
-            .getMany()
-    }
+      return this.createQueryBuilder("bookmark")
+          .where("bookmark.owner = :owner", { owner: owner })
+          .getMany();
+  }
+
+  static removeBookmark(filmId: number): Promise<DeleteResult> {
+      return this.createQueryBuilder("bookmark")
+          .delete()
+          .where("bookmark.filmId = :filmId", { filmId })
+          .execute();
+  }
 }
