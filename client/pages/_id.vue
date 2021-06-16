@@ -62,8 +62,6 @@
 import {mapGetters} from "vuex";
 
 export default {
-  name: 'movie-id',
-
   async asyncData({$axios, route}) {
     const movie = await $axios.$get(`http://localhost:3000/the-movie-db/find-movie-details?id=${route.params.id}`)
 
@@ -72,6 +70,7 @@ export default {
     movie?.belongs_to_collection?.backdrop_path ? images.push('https://image.tmdb.org/t/p/original/' + movie.belongs_to_collection.backdrop_path) : ''
 
     return {
+      name: 'movie-id',
       movie: movie,
       images : images
     }
