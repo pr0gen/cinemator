@@ -1,11 +1,7 @@
 <template>
   <div class="container mt-6">
 
-    <h1 class="title mt-6"> Connexion </h1>
-
-    <b-field label="Username">
-      <b-input v-model="username" @keyup.native="error.show = false" @keyup.native.enter="login"></b-input>
-    </b-field>
+    <h1 class="title mt-6"> Update password </h1>
 
     <b-field label="Password" >
       <b-input type="password" v-model="password" @keyup.native="error.show = false" @keyup.native.enter="login"
@@ -18,12 +14,22 @@
 
     <b-button type="button is-primary" @click="login">Connexion</b-button>
 
+
+    <h1 class="title mt-6">Delete account</h1>
+
+    <div class="buttons">
+      <b-button type="is-danger" expanded>Delete</b-button>
+    </div>
+
+
+
+
   </div>
 </template>
 
 <script>
 export default {
-  name: "login",
+  name: "account",
   data() {
     return {
       username: '',
@@ -42,26 +48,19 @@ export default {
         return
       }
 
-
-      this.$axios.post('http://localhost:3000/auth/login', {
+      const response = await this.$axios.post('http://localhost:3000/auth/login', {
         "username": this.username,
         "password": this.password
       })
-        .then((response) => {
-          if (response.status === 201) {
-            this.$store.dispatch('authentication/loadToken', response.data.token)
-            this.$store.dispatch('authentication/loadId', 5)
-            this.$router.push({path: '/'})
-            return
-          }
-          this.error.show = true
-          this.error.message = "Error"
-        })
-        .catch((error) => {
-          this.error.show = true
-          this.error.message = "Invalid login"
-        })
 
+
+      if (response.status === 201) {
+        this.$store.dispatch('authentication/loadToken', response.data.token)
+        this.$router.push({path: '/'})
+        return
+      }
+      this.error.show = true
+      this.error.message = "Error"
 
     },
   }

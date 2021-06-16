@@ -5,11 +5,17 @@ export const actions = {
 
       const token = localStorage.getItem('token')
 
-      if (!token) {
-        return
+      if (token) {
+        console.log("token loaded : " + token)
+        commit('authentication/SET_TOKEN', token)
       }
-      console.log("token loaded : " + token)
-      commit('authentication/SET_TOKEN', token)
+
+      const id = localStorage.getItem('id')
+
+      if (id) {
+        console.log("id loaded : " + id)
+        commit('authentication/SET_ID', id)
+      }
 
     }
   }
