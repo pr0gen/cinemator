@@ -13,29 +13,29 @@ export class BookmarkService {
     private userService: UsersService,
   ) {}
 
-  async findAll(): Promise<Bookmark[]> {
+  public async findAll(): Promise<Bookmark[]> {
     return this.bookmarkRepository.find();
   }
 
-  async findByOwner(owner: string): Promise<Bookmark[]> {
+  public async findByOwner(owner: string): Promise<Bookmark[]> {
     return this.userService.findOne(owner)
       .then(user => {
         return Bookmark.findByOwner(user.id); 
     });
   }
 
-  async createOne(newBookmark: InputBookmark): Promise<Bookmark> {
+  public async createOne(newBookmark: InputBookmark): Promise<Bookmark> {
     return this.userService.findOne(newBookmark.owner)
       .then(user => {
         return this.bookmarkRepository.save({ 
-          name: newBookmark.name,
+          filmId: newBookmark.filmId, // TODO check this
           owner: user.id,
         });
 
     });
   }
 
-  async removeBookmark(filmId: number): Promise<DeleteResult> {
+  public async removeBookmark(filmId: number): Promise<DeleteResult> {
     return Bookmark.removeBookmark(filmId);
   }
 

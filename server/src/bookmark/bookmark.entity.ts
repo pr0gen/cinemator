@@ -2,7 +2,7 @@ import { User } from '../users/user.entity';
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, DeleteResult } from 'typeorm';
 
 export interface InputBookmark {
-  name: string;
+  filmId: number;
   owner: string;
 }
 

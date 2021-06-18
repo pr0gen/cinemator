@@ -9,6 +9,7 @@ import { ApiAuthService } from './api-auth/api-auth.service';
 import { ApiAuthModule } from './api-auth/api-auth.module';
 import { AuthModule } from './auth/auth.module';
 import { BookmarkModule } from './bookmark/bookmark.module';
+import { LikeModule } from './like/like.module';
 
 
 @Module({
@@ -19,7 +20,8 @@ import { BookmarkModule } from './bookmark/bookmark.module';
     TheMovieDbModule,
     UsersModule,
     AuthModule,
-    BookmarkModule
+    BookmarkModule,
+    LikeModule
   ],
   controllers: [AppController],
   providers: [

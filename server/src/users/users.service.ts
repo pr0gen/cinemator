@@ -14,15 +14,15 @@ export class UsersService {
 
   @UseInterceptors(CacheInterceptor)
   @CacheTTL(30)
-  findAll(): Promise<User[]> {
+  public async findAll(): Promise<User[]> {
     return this.usersRepository.find();
   }
 
-  findOne(username: string): Promise<User> {
-    return User.findByName(username); 
+  public async findOne(username: string): Promise<User> {
+    return User.findByName(username);
   }
 
-  async createOne(inputUser: InputUser): Promise<User> {
+  public async createOne(inputUser: InputUser): Promise<User> {
     return this.usersRepository.save({ 
       username: inputUser.username,
       email: inputUser.email,
@@ -31,11 +31,8 @@ export class UsersService {
     });
   }
 
-  async remove(id: string): Promise<void> {
+  public async remove(id: string): Promise<void> {
     await this.usersRepository.delete(id);
   }
 
-  helloWorld(): string {
-    return 'hello world';
-  }
 }

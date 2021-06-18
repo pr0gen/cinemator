@@ -1,3 +1,4 @@
+drop table if exists user_like;
 drop table if exists bookmark;
 drop table if exists user;
 
@@ -20,7 +21,18 @@ create table bookmark
     filmId  int,
     date    timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
     ownerId int                                 null,
-    constraint FK_4d81414dd3eb3e64dbeb271a2a7
+    constraint FK_BOOKMARK_USER
+        foreign key (ownerId) references user (id)
+);
+
+create table user_like
+(
+    id      int auto_increment
+        primary key,
+    filmId  int,
+    date    timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+    ownerId int                                 null,
+    constraint FK_LIKE_USER
         foreign key (ownerId) references user (id)
 );
 
@@ -40,3 +52,10 @@ VALUES (15239, 2);
 INSERT INTO bookmark(filmId, ownerId)
 VALUES (126889, 2);
 
+
+INSERT INTO user_like(filmId, ownerId)
+VALUES (1771, 1);
+INSERT INTO user_like(filmId, ownerId)
+VALUES (15239, 2);
+INSERT INTO user_like(filmId, ownerId)
+VALUES (126889, 2);

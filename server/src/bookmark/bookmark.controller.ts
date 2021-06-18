@@ -1,34 +1,33 @@
-import { Body, Controller, Delete, Get, Post, Query, UseGuards } from '@nestjs/common';
-import { DeleteResult } from 'typeorm';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { InputBookmark, Bookmark } from './bookmark.entity';
-import { BookmarkService } from './bookmark.service';
+import {Body, Controller, Delete, Get, Post, Query, UseGuards} from '@nestjs/common';
+import {DeleteResult} from 'typeorm';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {InputBookmark, Bookmark} from './bookmark.entity';
+import {BookmarkService} from './bookmark.service';
 
 @Controller('bookmark')
 export class BookmarkController {
 
-  constructor(private readonly bookmarkService: BookmarkService) {}
+    constructor(private readonly bookmarkService: BookmarkService) {
+    }
 
-  @UseGuards(JwtAuthGuard)
-  @Post('create') 
-  async create_user(@Body() newBookmark: InputBookmark): Promise<Bookmark> {
-    return this.bookmarkService.createOne(newBookmark);
-  }
+    @UseGuards(JwtAuthGuard)
+    @Post('create')
+    public async create_user(@Body() newBookmark: InputBookmark): Promise<Bookmark> {
+        return this.bookmarkService.createOne(newBookmark);
+    }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('owner')
-  async get_bookmarks(@Query('owner') owner: string): Promise<Bookmark[]> {
+    // @UseGuards(JwtAuthGuard)  // DONOTPUSH
+    @Get('owner')
+    public async get_bookmarks(@Query('owner') owner: string): Promise<Bookmark[]> {
+        this.bookmarkService.findByOwner(owner)
+            .then(b => console.log(b));
+        return this.bookmarkService.findByOwner(owner);
+    }
 
-    this.bookmarkService.findByOwner(owner)
-    .then( b => console.log(b));
-
-    return this.bookmarkService.findByOwner(owner);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Delete()
-  async delete_bookmark(@Query('filmId') filmId: number): Promise<DeleteResult> {
-    return this.bookmarkService.removeBookmark(filmId);
-  }
+    @UseGuards(JwtAuthGuard)
+    @Delete()
+    public async delete_bookmark(@Query('filmId') filmId: number): Promise<DeleteResult> {
+        return this.bookmarkService.removeBookmark(filmId);
+    }
 
 }

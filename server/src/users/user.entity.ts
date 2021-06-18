@@ -1,5 +1,6 @@
 import { Bookmark } from '../bookmark/bookmark.entity';
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { UserLike } from 'src/like/like.entity';
 
 
 export interface InputUser {
@@ -41,11 +42,13 @@ export class User extends BaseEntity {
   @OneToMany(type => Bookmark, bookmark => bookmark.owner) 
   bookmarks: Bookmark[];
 
+  @OneToMany(type => UserLike, like => like.owner) 
+  likes: UserLike[];
 
   static findByName(username: string): Promise<User> {
-        return this.createQueryBuilder("user")
-            .where("user.username = :username", { username })
-            .getOne();
-    }
+      return this.createQueryBuilder("user")
+          .where("user.username = :username", { username })
+          .getOne();
+  }
 }
 
