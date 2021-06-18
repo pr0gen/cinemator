@@ -1,6 +1,6 @@
 import {CacheInterceptor, CacheTTL, Injectable, UseInterceptors} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InputUser, User } from './user.entity';
 
 @Injectable()
@@ -31,8 +31,8 @@ export class UsersService {
     });
   }
 
-  public async remove(id: string): Promise<void> {
-    await this.usersRepository.delete(id);
+  public async remove(id: number): Promise<DeleteResult> {
+    return this.usersRepository.delete(id);
   }
 
 }

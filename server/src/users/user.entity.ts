@@ -1,6 +1,6 @@
 import { Bookmark } from '../bookmark/bookmark.entity';
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { UserLike } from 'src/like/like.entity';
+import { UserLike } from '../like/like.entity';
 
 
 export interface InputUser {
