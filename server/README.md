@@ -1,8 +1,11 @@
 # Getting started
 Create a .env file with 
+
 ```
 API_KEY_THE_MOVIE_DB={key}
 ```
+
+[Swagger](http://localhost:3000/api) is avilable ! 
 
 # API path
 

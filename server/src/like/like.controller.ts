@@ -8,7 +8,7 @@ export class LikeController {
 
   constructor(private readonly likeService: LikeService) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Put('update') 
   public async update_like(@Body() like: InputLike) {
     this.likeService.updateLike(like);

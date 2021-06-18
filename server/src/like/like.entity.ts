@@ -20,13 +20,13 @@ export class UserLike extends BaseEntity {
   @Column({ type: 'timestamp'})
   date: Date;
 
-  static findByOwner(owner: number): Promise<UserLike[]> {
+  public static findByOwner(owner: number): Promise<UserLike[]> {
       return this.createQueryBuilder("user_like")
           .where("user_like.owner = :owner", { owner: owner })
           .getMany();
   }
 
-  static findByFilmIdAndOwner(filmId: number, owner: number): Promise<UserLike> {
+  public static findByFilmIdAndOwner(filmId: number, owner: number): Promise<UserLike> {
       return this.createQueryBuilder("user_like")
           .where("user_like.owner = :owner", { owner: owner })
           .andWhere("user_like.filmId = :filmId", {filmId: filmId})

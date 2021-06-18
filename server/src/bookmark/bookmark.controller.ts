@@ -16,7 +16,7 @@ export class BookmarkController {
         return this.bookmarkService.createOne(newBookmark);
     }
 
-    // @UseGuards(JwtAuthGuard)  // DONOTPUSH
+    @UseGuards(JwtAuthGuard)
     @Get('owner')
     public async get_bookmarks(@Query('owner') owner: string): Promise<Bookmark[]> {
         this.bookmarkService.findByOwner(owner)
