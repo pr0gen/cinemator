@@ -55,6 +55,19 @@ POST localhost:3000/users/create
 DELETE http://localhost:3000/users?userId=3
 ``` 
 
+### Update user
+#### password
+``` 
+PUT localhost:3000/users/update/password
+{
+    "id": "6",
+    "oldPassword": "pwd",
+    "newPassword": "p"
+}
+
+```
+
+
 ## Bookmarks
 
 ### Create bookmark
