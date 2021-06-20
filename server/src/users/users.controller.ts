@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, InternalServerErrorException, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { CinematorLogger } from '../logger/logger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { InputUser, ResetPassword } from './user.entity';
@@ -20,23 +20,34 @@ export class UsersController {
 
     @Post('create')
     public async create_user(@Body() userInput: InputUser): Promise<OutputUser> {
-        let user = await this.usersService.createOne(userInput);
-        this.logger.log('[CREATE USER]: id: ' + user.id + ' username: ' + userInput.username + ' email: ' + userInput.email);
-        return Promise.resolve(
-            {
-                id: user.id,
-                username: user.username,
-                email: user.email,
-                isActive: user.isActive,
-                updatedAt: user.updatedAt,
-                createdAt: user.createdAt
+        return this.usersService.createOne(userInput)
+            .then(user => {
+                this.logger.log('[CREATE USER]: id: ' + user.id + ' username: ' + userInput.username + ' email: ' + userInput.email);
+                return Promise.resolve(
+                    {
+                        id: user.id,
+                        username: user.username,
+                        email: user.email,
+                        isActive: user.isActive,
+                        updatedAt: user.updatedAt,
+                        createdAt: user.createdAt
+                    });
+            })
+            .catch(e => {
+                this.logger.log('[CREATE USER]: Failed to create user (username: ' + userInput.username + 'email: ' + userInput.email + ')', e);
+                throw new InternalServerErrorException();
             });
     }
 
     @UseGuards(JwtAuthGuard)
     @Delete()
-    public async delete_user(@Query('userId') userId: number) {
-        this.usersService.remove(userId);
+    public async delete_user(@Query('userId') userId: number): Promise<any> {
+        return this.usersService.remove(userId)
+            .then(_ => this.logger.log('[DELETE USER]: id: ' + userId))
+            .catch(e => {
+                this.logger.error('[DELETE USER]: id: ' + userId, e)
+                throw new InternalServerErrorException(e, "Something went wrong when deleting")
+            });
     }
 
     @UseGuards(JwtAuthGuard)

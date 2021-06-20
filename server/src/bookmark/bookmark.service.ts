@@ -35,8 +35,8 @@ export class BookmarkService {
             });
     }
 
-    public async removeBookmark(filmId: number): Promise<DeleteResult> {
-        return Bookmark.removeBookmark(filmId);
+    public async removeBookmark(id: number): Promise<DeleteResult> {
+        return Bookmark.removeBookmark(id);
     }
 
 }

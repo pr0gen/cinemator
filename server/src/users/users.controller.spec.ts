@@ -2,13 +2,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { User } from './user.entity';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { MockType, repositoryMockFactory } from '../test.utils';
-import { Repository } from 'typeorm';
+import { MockAuthGuard, MockType, repositoryMockFactory } from '../test.utils';
+import { DeleteResult, Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CacheInterceptor, CacheModule, INestApplication, ValidationPipe } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import * as request from 'supertest';
 import { CinematorLogger } from '../logger/logger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 describe('AppController', () => {
     let userRepository: MockType<Repository<User>>;
@@ -24,7 +25,10 @@ describe('AppController', () => {
                 { provide: APP_INTERCEPTOR, useClass: CacheInterceptor, },
                 CinematorLogger
             ],
-        }).compile();
+        })
+            .overrideGuard(JwtAuthGuard)
+            .useValue(MockAuthGuard)
+            .compile();
 
         userRepository = module.get(getRepositoryToken(User));
 
@@ -58,13 +62,25 @@ describe('AppController', () => {
                 .expect(user);
         });
 
-        // it('should delete user', async () => {
-        // // userRepository.remove.mockReturnValue();
+        // it('should failed create user', async () => {
+        // userRepository.save.mockReturnValue(Promise.reject());
+        // 
         // return request(app.getHttpServer())
-        // .delete('/users?user_id=1')
-        // .expect(200);
-        // 
-        // 
+        // .post('/users/create')
+        // .send({
+        // username: "Tigran",
+        // email: "tigran@example.com",
+        // password: "password"
+        // })
+        // .expect(500);
         // });
+
+        it('should delete user', async () => {
+            userRepository.delete.mockReturnValue(Promise.resolve());
+            return request(app.getHttpServer())
+                .delete('/users?user_id=1')
+                .expect(200);
+        });
+
     });
 });

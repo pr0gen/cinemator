@@ -7,6 +7,7 @@ import { BookmarkService } from './bookmark.service';
 import { BookmarkController } from './bookmark.controller';
 import { Bookmark } from './bookmark.entity';
 import { UsersModule } from '../users/users.module';
+import { CinematorLogger } from '../logger/logger';
 
 @Module({
 
@@ -23,6 +24,7 @@ import { UsersModule } from '../users/users.module';
             provide: APP_INTERCEPTOR,
             useClass: CacheInterceptor,
         },
+        CinematorLogger
     ],
     exports: [BookmarkService],
     controllers: [BookmarkController],

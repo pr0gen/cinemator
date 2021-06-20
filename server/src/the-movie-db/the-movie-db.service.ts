@@ -16,17 +16,16 @@ export class TheMovieDbService {
 
     @UseInterceptors(CacheInterceptor)
     @CacheTTL(30)
-    async search_by_expression(expression: string): Promise<SearchResult | Error> {
+    async search_by_expression(expression: string): Promise<SearchResult> {
         return this.httpService
             .get(ApiConstant.BASIC_SEARCH + this.connection.api_key_the_movie_db + ApiConstant.QUERY + expression)
             .toPromise()
-            .then(res => res.data)
-            .catch(err => new Error(err));
+            .then(res => res.data);
     }
 
     @UseInterceptors(CacheInterceptor)
     @CacheTTL(30)
-    async lang_details(id: number): Promise<string[] | Error> {
+    async lang_details(id: number): Promise<string[]> {
         return this.httpService
             .get(
                 ApiConstant.BASE_LANG_DETAILS + id + '/' + ApiConstant.TRANSLATION +
@@ -36,13 +35,12 @@ export class TheMovieDbService {
             .then(res => {
                 let data: MovieTranslation = res.data;
                 return data.translations.map(t => t.name);
-            })
-            .catch(err => new Error(err));
+            });
     }
 
     @UseInterceptors(CacheInterceptor)
     @CacheTTL(30)
-    async find_movie_details(id: number): Promise<MovieDetails | Error> {
+    async find_movie_details(id: number): Promise<MovieDetails> {
         console.log(ApiConstant.MOVIE_DETAILS + id + '/' + ApiConstant.API_KEY_PATH
             + this.connection.api_key_the_movie_db + ApiConstant.LANG + "en-US");
         return this.httpService
@@ -51,8 +49,7 @@ export class TheMovieDbService {
                 + this.connection.api_key_the_movie_db + ApiConstant.LANG + "en-US"
             )
             .toPromise()
-            .then(res => res.data)
-            .catch(err => new Error(err));
+            .then(res => res.data);
     }
 
 }

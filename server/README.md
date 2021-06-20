@@ -87,7 +87,7 @@ GET localhost:3000/bookmark/owner?owner=Tigran
 
 ### Delete bookmark by filmId 
 ```
-DELETE localhost:3000/bookmark?filmId=
+DELETE localhost:3000/bookmark?id=
 ```
 
 ## Likes

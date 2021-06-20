@@ -26,10 +26,10 @@ export class Bookmark extends BaseEntity {
             .getMany();
     }
 
-    static removeBookmark(filmId: number): Promise<DeleteResult> {
+    static removeBookmark(id: number): Promise<DeleteResult> {
         return this.createQueryBuilder("bookmark")
             .delete()
-            .where("bookmark.filmId = :filmId", { filmId })
+            .where("bookmark.id = :id", { id })
             .execute();
     }
 }
