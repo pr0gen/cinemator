@@ -1,10 +1,14 @@
 # Getting started
 Create a .env file with 
+
 ```
 API_KEY_THE_MOVIE_DB={key}
 ```
 
+[Swagger](http://localhost:3000/api) is avilable ! 
+
 # API path
+
 
 ### Login 
 ```
@@ -33,6 +37,7 @@ GET localhost:3000/the-movie-db/lang-details?id=47369
 GET localhost:3000/the-movie-db/find-movie-details?id=47369
 ```
 
+## Users
 ### Create user
 
 ```
@@ -44,6 +49,26 @@ POST localhost:3000/users/create
 }
 
 ```
+
+### Delete user
+``` 
+DELETE http://localhost:3000/users?userId=3
+``` 
+
+### Update user
+#### password
+``` 
+PUT localhost:3000/users/update/password
+{
+    "id": "6",
+    "oldPassword": "pwd",
+    "newPassword": "p"
+}
+
+```
+
+
+## Bookmarks
 
 ### Create bookmark
 ```
@@ -62,5 +87,17 @@ GET localhost:3000/bookmark/owner?owner=Tigran
 
 ### Delete bookmark by filmId 
 ```
-DELETE localhost:3000/bookmark?filmId=
+DELETE localhost:3000/bookmark?id=
 ```
+
+## Likes
+
+### Update like 
+```
+PUT localhost:3000/like/update 
+{
+  "owner": "Tigran",
+  "filmId": 1
+}
+```
+
