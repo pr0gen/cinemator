@@ -7,28 +7,29 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private authService: AuthService,
-    private jwtService: JwtService
+    constructor(
+        private authService: AuthService,
+        private jwtService: JwtService
     ) {
-    super();
-  }
-
-  async validate(username: string, password: string): Promise<OutputUser> {
-    const user = await this.authService.validateUser(username, password);
-    if (!user) {
-      throw new UnauthorizedException();
+        super();
     }
 
-    return { 
-      firstName: user.firstName,
-      lastName: user.lastName,
-      token: this.generate_token(user)
-    };
-  }
+    async validate(username: string, password: string): Promise<OutputUser> {
+        const user = await this.authService.validateUser(username, password);
+        if (!user) {
+            throw new UnauthorizedException();
+        }
 
-  generate_token(user: User): string {
-    const payload = { username: user.firstName, sub: user.id};
-    return this.jwtService.sign(payload);
-  }
+        return {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            token: this.generate_token(user)
+        };
+    }
+
+    generate_token(user: User): string {
+        const payload = { username: user.username, sub: user.id };
+        return this.jwtService.sign(payload);
+    }
 }
