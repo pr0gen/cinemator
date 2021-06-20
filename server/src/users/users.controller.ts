@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Post, Put, Query, UseGuards } from '@nestjs/common';
-import { CinematorLogger } from 'src/logger/logger';
+import { CinematorLogger } from '../logger/logger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { InputUser, ResetPassword } from './user.entity';
 import { UsersService } from './users.service';

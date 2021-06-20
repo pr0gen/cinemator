@@ -8,6 +8,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { CacheInterceptor, CacheModule, INestApplication, ValidationPipe } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import * as request from 'supertest';
+import { CinematorLogger } from '../logger/logger';
 
 describe('AppController', () => {
     let userRepository: MockType<Repository<User>>;
@@ -21,6 +22,7 @@ describe('AppController', () => {
                 UsersService,
                 { provide: getRepositoryToken(User), useFactory: repositoryMockFactory },
                 { provide: APP_INTERCEPTOR, useClass: CacheInterceptor, },
+                CinematorLogger
             ],
         }).compile();
 
@@ -41,7 +43,7 @@ describe('AppController', () => {
         it('should create user', async () => {
             let user = {
                 id: 1, username: "Tigran", email: "tigran@example.com",
-                isActive: false, updated_at: new Date().toDateString(), created_at: new Date().toDateString()
+                isActive: false, updatedAt: new Date().toDateString(), createdAt: new Date().toDateString()
             };
             userRepository.save.mockReturnValue(Promise.resolve(user));
 
