@@ -7,15 +7,15 @@ import { TheMovieDbService } from './the-movie-db.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
-  imports: [HttpModule, ConfigModule, CacheModule.register()],
-  controllers: [TheMovieDbController],
-  providers: [
-    TheMovieDbService,
-    ApiAuthService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
-    },
-  ],
+    imports: [HttpModule, ConfigModule, CacheModule.register()],
+    controllers: [TheMovieDbController],
+    providers: [
+        TheMovieDbService,
+        ApiAuthService,
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: CacheInterceptor,
+        },
+    ],
 })
-export class TheMovieDbModule {}
+export class TheMovieDbModule { }

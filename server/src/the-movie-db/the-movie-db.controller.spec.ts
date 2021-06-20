@@ -7,24 +7,24 @@ import { ApiAuthService } from '../api-auth/api-auth.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 describe('TheMovieDbController', () => {
-  let controller: TheMovieDbController;
+    let controller: TheMovieDbController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [HttpModule, ConfigModule , CacheModule.register()],
-      controllers: [TheMovieDbController],
-      providers: [TheMovieDbService, ApiAuthService,
-        {
-          provide: APP_INTERCEPTOR,
-          useClass: CacheInterceptor,
-        },
-      ],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            imports: [HttpModule, ConfigModule, CacheModule.register()],
+            controllers: [TheMovieDbController],
+            providers: [TheMovieDbService, ApiAuthService,
+                {
+                    provide: APP_INTERCEPTOR,
+                    useClass: CacheInterceptor,
+                },
+            ],
+        }).compile();
 
-    controller = module.get<TheMovieDbController>(TheMovieDbController);
-  });
+        controller = module.get<TheMovieDbController>(TheMovieDbController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
+    });
 });

@@ -6,23 +6,23 @@ import { TheMovieDbService } from './the-movie-db.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 describe('TheMovieDbService', () => {
-  let service: TheMovieDbService;
+    let service: TheMovieDbService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [HttpModule, ConfigModule, CacheModule.register()],
-      providers: [TheMovieDbService, ApiAuthService,
-        {
-          provide: APP_INTERCEPTOR,
-          useClass: CacheInterceptor,
-        },
-      ],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            imports: [HttpModule, ConfigModule, CacheModule.register()],
+            providers: [TheMovieDbService, ApiAuthService,
+                {
+                    provide: APP_INTERCEPTOR,
+                    useClass: CacheInterceptor,
+                },
+            ],
+        }).compile();
 
-    service = module.get<TheMovieDbService>(TheMovieDbService);
-  });
+        service = module.get<TheMovieDbService>(TheMovieDbService);
+    });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(service).toBeDefined();
+    });
 });

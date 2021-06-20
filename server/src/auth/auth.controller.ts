@@ -6,12 +6,12 @@ import { OutputUser } from '../users/user.entity';
 @Controller('auth')
 export class AuthController {
 
-  constructor() {}
+    constructor() { }
 
-  @UseGuards(AuthGuard('local'))
-  @Post('login')
-  public async login(@Request() request): Promise<OutputUser> {
-    return request.user;  
-  }
+    @UseGuards(AuthGuard('local'))
+    @Post('login')
+    public async login(@Request() request): Promise<OutputUser> {
+        return request.user;
+    }
 
 }

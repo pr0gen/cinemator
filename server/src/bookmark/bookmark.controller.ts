@@ -1,8 +1,8 @@
-import {Body, Controller, Delete, Get, Post, Query, UseGuards} from '@nestjs/common';
-import {DeleteResult} from 'typeorm';
-import {JwtAuthGuard} from '../auth/jwt-auth.guard';
-import {InputBookmark, Bookmark} from './bookmark.entity';
-import {BookmarkService} from './bookmark.service';
+import { Body, Controller, Delete, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { InputBookmark, Bookmark } from './bookmark.entity';
+import { BookmarkService } from './bookmark.service';
 
 @Controller('bookmark')
 export class BookmarkController {

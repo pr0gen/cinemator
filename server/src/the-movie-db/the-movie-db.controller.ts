@@ -5,7 +5,7 @@ import { TheMovieDbService } from './the-movie-db.service';
 @Controller('the-movie-db')
 export class TheMovieDbController {
 
-  constructor(private theMovieDbService: TheMovieDbService) {}
+    constructor(private theMovieDbService: TheMovieDbService) { }
 
     @Get('search')
     async findOne(@Query('expression') expression: string): Promise<SearchResult | Error> {

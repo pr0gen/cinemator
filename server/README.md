@@ -52,7 +52,7 @@ POST localhost:3000/users/create
 
 ### Delete user
 ``` 
-DELETE http://localhost:3000/users?user_id=3
+DELETE http://localhost:3000/users?userId=3
 ``` 
 
 ## Bookmarks

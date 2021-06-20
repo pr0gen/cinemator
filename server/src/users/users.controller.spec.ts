@@ -10,59 +10,59 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import * as request from 'supertest';
 
 describe('AppController', () => {
-  let userRepository: MockType<Repository<User>>;
-  let app: INestApplication;
+    let userRepository: MockType<Repository<User>>;
+    let app: INestApplication;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [CacheModule.register()], 
-      controllers: [UsersController],
-      providers: [
-        UsersService,
-        { provide: getRepositoryToken(User), useFactory: repositoryMockFactory },
-        { provide: APP_INTERCEPTOR, useClass: CacheInterceptor, },
-      ],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            imports: [CacheModule.register()],
+            controllers: [UsersController],
+            providers: [
+                UsersService,
+                { provide: getRepositoryToken(User), useFactory: repositoryMockFactory },
+                { provide: APP_INTERCEPTOR, useClass: CacheInterceptor, },
+            ],
+        }).compile();
 
-    userRepository = module.get(getRepositoryToken(User));
+        userRepository = module.get(getRepositoryToken(User));
 
-    app = module.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe());
+        app = module.createNestApplication();
+        app.useGlobalPipes(new ValidationPipe());
 
-    await app.init();
-  });
-
-  afterEach(() => {
-    return  app && app.close();
-  });
-
-  describe('root', () => {
-
-    it('should create user', async () => {
-      let user = {
-        id: 1, username: "Tigran", email: "tigran@example.com",
-        isActive: false, updated_at: new Date().toDateString(), created_at: new Date().toDateString()
-      };
-      userRepository.save.mockReturnValue(Promise.resolve(user));
-
-      return request(app.getHttpServer())
-        .post('/users/create')
-        .send({ 
-          username: "Tigran",
-          email: "tigran@example.com",
-          password: "password"
-      })
-      .expect(201)
-      .expect(user);
+        await app.init();
     });
 
-    // it('should delete user', async () => {
-      // // userRepository.remove.mockReturnValue();
-      // return request(app.getHttpServer())
+    afterEach(() => {
+        return app && app.close();
+    });
+
+    describe('root', () => {
+
+        it('should create user', async () => {
+            let user = {
+                id: 1, username: "Tigran", email: "tigran@example.com",
+                isActive: false, updated_at: new Date().toDateString(), created_at: new Date().toDateString()
+            };
+            userRepository.save.mockReturnValue(Promise.resolve(user));
+
+            return request(app.getHttpServer())
+                .post('/users/create')
+                .send({
+                    username: "Tigran",
+                    email: "tigran@example.com",
+                    password: "password"
+                })
+                .expect(201)
+                .expect(user);
+        });
+
+        // it('should delete user', async () => {
+        // // userRepository.remove.mockReturnValue();
+        // return request(app.getHttpServer())
         // .delete('/users?user_id=1')
         // .expect(200);
         // 
-// 
-    // });
-  });
+        // 
+        // });
+    });
 });

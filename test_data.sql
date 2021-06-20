@@ -10,8 +10,8 @@ create table user
     email      varchar(255)                        not null,
     password   varchar(255)                        not null,
     isActive   tinyint   default 0                 not null,
-    updated_at timestamp default CURRENT_TIMESTAMP not null,
-    created_at timestamp default CURRENT_TIMESTAMP not null
+    updatedAt timestamp default CURRENT_TIMESTAMP not null,
+    createdAt timestamp default CURRENT_TIMESTAMP not null
 );
 
 create table bookmark

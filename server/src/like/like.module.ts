@@ -6,12 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([UserLike]),
-    UsersModule
-  ],
-  providers: [LikeService],
-  exports: [LikeService],
-  controllers: [LikeController]
+    imports: [
+        TypeOrmModule.forFeature([UserLike]),
+        UsersModule
+    ],
+    providers: [LikeService],
+    exports: [LikeService],
+    controllers: [LikeController]
 })
-export class LikeModule {}
+export class LikeModule { }
