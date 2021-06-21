@@ -38,10 +38,14 @@ export class UsersService {
     public async updatePassword(resetPassword: ResetPassword): Promise<User> {
         return User.findById(resetPassword.id)
             .then(user => {
-                return this.createOne({
+                return this.usersRepository.save({
+                    id: user.id,
                     username: user.username,
                     email: user.email,
-                    password: resetPassword.newPassword
+                    password: resetPassword.newPassword,
+                    isActive: true,
+                    createdAt: user.createdAt,
+                    updatedAt: new Date()
                 })
             });
     }

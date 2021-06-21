@@ -18,7 +18,6 @@ export class OutputUser {
 
 export interface ResetPassword {
     id: number;
-    oldPassword: string;
     newPassword: string;
 }
 
