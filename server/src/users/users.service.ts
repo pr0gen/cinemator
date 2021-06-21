@@ -45,6 +45,7 @@ export class UsersService {
                     password: resetPassword.newPassword,
                     isActive: true,
                     createdAt: user.createdAt,
+                    updatedAt: new Date()
                 })
             });
     }
