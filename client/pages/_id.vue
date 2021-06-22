@@ -117,7 +117,19 @@ export default {
 
     async bookmark() {
 
-      console.log(this.name)
+      const {data: movies} = await this.$axios.get(`http://localhost:3000/bookmark/owner?owner=${this.username}`)
+
+      if(!movies.includes(this.movie.id)) {
+        const response = await this.$axios.post('http://localhost:3000/bookmark/create', {
+          "filmId": this.movie.id,
+          "owner": this.username
+        })
+      }
+      else {
+        const response = await this.$axios.delete(`http://localhost:3000/bookmark?id=${this.movie}`)
+      }
+
+      console.log(this.movie.id)
       console.log(this.username)
 
     },
