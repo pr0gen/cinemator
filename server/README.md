@@ -49,10 +49,9 @@ localhost:3000/users/create
 ```
 localhost:3000/bookmark/create
 {
-  "name": "avenger",
+  "filmId": 1771,
   "owner": "Tigran"
 }
-
 ```
 
 ### Get bookmarks for user
