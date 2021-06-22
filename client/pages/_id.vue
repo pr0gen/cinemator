@@ -35,8 +35,8 @@
 
         <b-rate :value="movie.vote_average / 2" custom-text="Vote Average"></b-rate>
 
-        <button class="btn-classic" @click="like" v-if="isLoggedIn"> Like </button>
-        <button class="btn-classic" @click="bookmark" v-if="isLoggedIn"> Bookmark </button>
+        <button class="btn-classic" v-bind:class="{ like: isLiked }" @click="like; isLiked = !isLiked" v-if="isLoggedIn"> Like </button>
+        <button class="btn-classic" :class="{ active: isActive }" @click="bookmark; isActive = !isActive" v-if="isLoggedIn"> Bookmark </button>
 
       </div>
 
@@ -76,6 +76,13 @@ export default {
     }
   },
 
+  data(){
+    return {
+      isLiked: false,
+      isActive: false
+    }
+  },
+
   computed: {
     ...mapGetters('authentication', ['isLoggedIn', 'username'])
   },
@@ -112,7 +119,10 @@ export default {
     },
 
     async like() {
-
+      const response = await this.$axios.put(`localhost:3000/like/update`, {
+        "owner": this.username,
+        "filmId": 1
+      })
     },
 
     async bookmark() {
@@ -133,13 +143,6 @@ export default {
       console.log(this.username)
 
     },
-  },
-
-  // components: {
-  //   Card,
-  // },
-  data() {
-    return {};
   },
 
 };
@@ -173,5 +176,9 @@ export default {
   .btn-classic:active {
     background-color: white;
     color: #d4810b;
+  }
+
+  .active, .like {
+    background-color: #28a51f;
   }
 </style>
