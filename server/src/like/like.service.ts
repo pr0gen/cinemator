@@ -20,14 +20,24 @@ export class LikeService {
             });
     }
 
-    public async updateLike(like: InputLike) {
+    public async updateLike(like: InputLike): Promise<boolean> {
         const filmId = like.filmId;
-        this.userService.findOne(like.owner)
-            .then(user => {
-                UserLike.findByFilmIdAndOwner(user.id, filmId)
-                    .then(like => this.userLikeRepository.remove(like))
-                    .catch(_ => this.userLikeRepository.save({ filmId: filmId, owner: user.id }))
-            });
+        const userId = like.ownerId;
+        return UserLike.findByFilmIdAndOwner(userId, filmId)
+            .then(like => {
+                if (undefined === like) {
+                    return this.createLike(userId, filmId);
+                }
+                // like is already there, so we remove it
+                this.userLikeRepository.remove(like);
+                return Promise.resolve(true);
+            })
+            .catch(_ => this.createLike(userId, filmId));
+    }
+
+    private async createLike(userId: number, filmId: number): Promise<boolean> {
+        this.userLikeRepository.save({ filmId: filmId, owner: userId });
+        return Promise.resolve(false);
     }
 
 }

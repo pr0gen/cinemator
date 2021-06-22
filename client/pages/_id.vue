@@ -35,8 +35,12 @@
 
         <b-rate :value="movie.vote_average / 2" custom-text="Vote Average"></b-rate>
 
-        <button class="btn-classic" v-bind:class="{ like: isLiked }" @click="like; isLiked = !isLiked" v-if="isLoggedIn"> Like </button>
-        <button class="btn-classic" :class="{ active: isActive }" @click="bookmark; isActive = !isActive" v-if="isLoggedIn"> Bookmark </button>
+        <button class="btn-classic" v-bind:class="{ like: isLiked }" @click="like"
+                v-if="isLoggedIn"> Like
+        </button>
+        <button class="btn-classic" :class="{ active: isActive }" @click="bookmark; isActive = !isActive"
+                v-if="isLoggedIn"> Bookmark
+        </button>
 
       </div>
 
@@ -59,6 +63,7 @@
 
 <script>
 
+import Swal from 'sweetalert2'
 import {mapGetters} from "vuex";
 
 export default {
@@ -72,11 +77,11 @@ export default {
     return {
       name: 'movie-id',
       movie: movie,
-      images : images
+      images: images
     }
   },
 
-  data(){
+  data() {
     return {
       isLiked: false,
       isActive: false
@@ -84,58 +89,83 @@ export default {
   },
 
   computed: {
-    ...mapGetters('authentication', ['isLoggedIn', 'username'])
+    ...mapGetters('authentication', ['isLoggedIn', 'username', 'token', 'id'])
   },
 
   methods: {
-    convertTime(minute){
+    convertTime(minute) {
       let hours = (minute / 60)
       let rhours = Math.floor(hours);
       let minutes = (hours - rhours) * 60
       let rminutes = Math.round(minutes)
-      let result = rhours == 1 ? rhours + " hour and " : rhours + " hours and "
-      return result + + rminutes + " minutes."
+      let result = rhours === 1 ? rhours + " hour and " : rhours + " hours and "
+      return result + +rminutes + " minutes."
     },
+
     fullLangue(lang) {
-      let fullLang = '';
       switch (lang) {
         case 'en':
-          fullLang = 'English'
-          break;
+          return 'English'
         case 'fr':
-          fullLang = 'French'
-          break;
+          return 'French'
         case 'it':
-          fullLang = 'Italian'
-          break;
+          return 'Italian'
         default:
-          fullLang = 'english'
+          return 'english'
       }
-      console.log(fullLang)
-      return fullLang
     },
+
     getImgUrl(value) {
       return `https://picsum.photos/id/43${value}/1230/500`
     },
 
-    async like() {
-      const response = await this.$axios.put(`localhost:3000/like/update`, {
-        "owner": this.username,
-        "filmId": 1
+    like() {
+      this.$axios.put(`localhost:3000/like/update`,
+        {
+          'ownerId': `${this.id}`,
+          'filmId': this.movie.id
+        },
+        {
+          "headers": {
+            'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'application/json'
+          }
+        }).then(response => {
+        if (response.status === 200) {
+          console.log('Hello');
+            
+          Swal.fire(
+            'Like',
+            'You liked',
+            'success'
+          );
+          this.isLiked = !this.isLiked;
+          return;
+        }
+          this.isLiked = this.isLiked;
       })
+        .catch(error => {
+        console.log('Error');
+            Swal.fire(
+              'Like',
+              'Something bad happened',
+              'error'
+            );
+            this.isLiked = this.isLiked;
+            return;
+        });
     },
 
     async bookmark() {
 
       const {data: movies} = await this.$axios.get(`http://localhost:3000/bookmark/owner?owner=${this.username}`)
 
-      if(!movies.includes(this.movie.id)) {
+      if (!movies.includes(this.movie.id)) {
         const response = await this.$axios.post('http://localhost:3000/bookmark/create', {
           "filmId": this.movie.id,
           "owner": this.username
         })
-      }
-      else {
+      } else {
         const response = await this.$axios.delete(`http://localhost:3000/bookmark?id=${this.movie}`)
       }
 
@@ -152,33 +182,34 @@ export default {
 
 
 <style>
-  .is-active .al img {
-    filter: grayscale(0%);
-  }
-  .al img {
-    filter: grayscale(100%);
-  }
+.is-active .al img {
+  filter: grayscale(0%);
+}
 
-  .mb-5 {
-    margin-bottom: 12px !important;
-  }
+.al img {
+  filter: grayscale(100%);
+}
 
-  .btn-classic {
-    width: 80px;
-    background-color: #d4810b;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 3px;
-    border: #d8c8b7 1px solid;
-    margin-right: 20px;
-  }
+.mb-5 {
+  margin-bottom: 12px !important;
+}
 
-  .btn-classic:active {
-    background-color: white;
-    color: #d4810b;
-  }
+.btn-classic {
+  width: 80px;
+  background-color: #d4810b;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: #d8c8b7 1px solid;
+  margin-right: 20px;
+}
 
-  .active, .like {
-    background-color: #28a51f;
-  }
+.btn-classic:active {
+  background-color: white;
+  color: #d4810b;
+}
+
+.active, .like {
+  background-color: #28a51f;
+}
 </style>

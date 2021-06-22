@@ -94,7 +94,7 @@ DELETE localhost:3000/bookmark?id=
 ```
 PUT localhost:3000/like/update 
 {
-  "owner": "Tigran",
+  "ownerId": 1,
   "filmId": 1
 }
 ```

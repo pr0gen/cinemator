@@ -2,7 +2,7 @@ import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 't
 import { User } from '../users/user.entity';
 
 export interface InputLike {
-    owner: string;
+    ownerId: number;
     filmId: number;
 }
 
