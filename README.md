@@ -23,7 +23,7 @@ make upd
 - Import our sql script to have some test data into the project
 
 ```
-docker-compose exec -T mysql  mysql -uroot -proot cinemator < test_data.sql
+docker-compose exec -T mysql  mysql -u root -p root cinemator < test_data.sql
 ```
 
 - Make sure you have this on your ```/etc/hosts``` file
@@ -54,6 +54,7 @@ works aswell for client app :
 ```Make ex-client```
 
 as ROOT :
+
 ```Make exa-server (or client like below)```
 
 the container mysql is reachable too with 

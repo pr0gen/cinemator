@@ -40,7 +40,6 @@ export default {
   methods: {
     show(){
       this.$router.push({path: '/' + this.id })
-      console.log('click movie');
     }
   }
 
