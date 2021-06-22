@@ -27,8 +27,10 @@
 <script>
 
 import Swal from 'sweetalert2'
+import {mapGetters} from "vuex";
 
 export default {
+
   name: "account",
   data() {
     return {
@@ -38,6 +40,9 @@ export default {
         message: ''
       },
     }
+  },
+  computed: {
+    ...mapGetters('authentication', ['id', 'token'])
   },
   methods: {
 
@@ -52,6 +57,25 @@ export default {
         confirmButtonText: 'Yes, delete it !'
       }).then((result) => {
         if (result.isConfirmed) {
+
+          this.$axios.delete(`http://localhost:3000/users?userId=${this.id}`, {
+            "headers": {
+              'Authorization' : `Bearer ${this.token}`,
+              'Content-Type': 'application/json'
+            }
+          }).then(response => {
+            console.log(response)
+            if (response.status === 201) {
+              this.$store.dispatch('authentication/loadToken', response.data.token)
+              this.$router.push({path: '/'})
+              return
+            }
+            this.error.show = true
+            this.error.message = "Error"
+          }).catch(error => {
+
+          })
+
           Swal.fire(
             'Deleted!',
             'Your account has been deleted.',
@@ -72,6 +96,7 @@ export default {
 
       this.$axios.post('http://localhost:3000/auth/login', {
         "password": this.password
+
       }).then(response => {
         console.log(response)
         if (response.status === 201) {

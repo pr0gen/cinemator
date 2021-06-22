@@ -18,7 +18,7 @@ export const actions = {
       const username = localStorage.getItem('username')
       if (username) {
         console.log("username loaded : " + username)
-        commit('authentication/SET_ID', username)
+        commit('authentication/SET_USERNAME', username)
       }
 
     }
