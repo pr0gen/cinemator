@@ -3,13 +3,13 @@
 
     <h1 class="title mt-6"> Update password </h1>
 
-    <b-field label="Password" >
+    <b-field label="Password">
       <b-input type="password" v-model="password" @keyup.native="error.show = false" @keyup.native.enter="login"
                password-reveal></b-input>
     </b-field>
 
     <b-message v-if='error.show' type="is-danger">
-      {{ error.message}}
+      {{ error.message }}
     </b-message>
 
     <b-button type="button is-primary" @click="updatePassword">Connexion</b-button>
@@ -60,27 +60,36 @@ export default {
 
           this.$axios.delete(`http://localhost:3000/users?userId=${this.id}`, {
             "headers": {
-              'Authorization' : `Bearer ${this.token}`,
+              'Authorization': `Bearer ${this.token}`,
               'Content-Type': 'application/json'
             }
           }).then(response => {
-            console.log(response)
-            if (response.status === 201) {
-              this.$store.dispatch('authentication/loadToken', response.data.token)
+            if (response.status === 200) {
+              Swal.fire(
+                'Deleted!',
+                'Your account has been deleted.',
+                'success'
+              )
+              this.$store.dispatch('authentication/logout')
               this.$router.push({path: '/'})
               return
             }
+            Swal.fire(
+              'Error',
+              'Token JWT not valid',
+              'error'
+            )
             this.error.show = true
             this.error.message = "Error"
           }).catch(error => {
-
+            Swal.fire(
+              'Error',
+              'Token JWT not valid',
+              'error'
+            )
           })
 
-          Swal.fire(
-            'Deleted!',
-            'Your account has been deleted.',
-            'success'
-          )
+
         }
       })
     },
@@ -94,14 +103,23 @@ export default {
         return
       }
 
-      this.$axios.post('http://localhost:3000/auth/login', {
-        "password": this.password
-
-      }).then(response => {
-        console.log(response)
-        if (response.status === 201) {
-          this.$store.dispatch('authentication/loadToken', response.data.token)
-          this.$router.push({path: '/'})
+      this.$axios.put(`http://localhost:3000/users/update/password`,
+        {
+          'id': this.id,
+          'newPassword': this.password
+        },
+        {
+          'headers': {
+            'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'application/json'
+          }
+        }).then(response => {
+        if (response.status === 200) {
+          Swal.fire(
+            'Password',
+            'Your password has been updated.',
+            'success'
+          )
           return
         }
         this.error.show = true
@@ -109,9 +127,6 @@ export default {
       }).catch(error => {
 
       })
-
-
-
 
 
     },

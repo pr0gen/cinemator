@@ -30,6 +30,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
     generate_token(user: User): string {
         const payload = { username: user.username, sub: user.id };
-        return this.jwtService.sign(payload);
+        return this.jwtService.sign(payload, {expiresIn : '36000s'});
     }
 }
