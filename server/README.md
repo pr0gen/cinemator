@@ -61,7 +61,6 @@ DELETE http://localhost:3000/users?userId=3
 PUT localhost:3000/users/update/password
 {
     "id": "6",
-    "oldPassword": "pwd",
     "newPassword": "p"
 }
 
