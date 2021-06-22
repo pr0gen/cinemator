@@ -5,17 +5,19 @@ import { ApiAuthService } from '../api-auth/api-auth.service';
 import { TheMovieDbController } from './the-movie-db.controller';
 import { TheMovieDbService } from './the-movie-db.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CinematorLogger } from '../logger/logger';
 
 @Module({
-  imports: [HttpModule, ConfigModule, CacheModule.register()],
-  controllers: [TheMovieDbController],
-  providers: [
-    TheMovieDbService,
-    ApiAuthService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
-    },
-  ],
+    imports: [HttpModule, ConfigModule, CacheModule.register()],
+    controllers: [TheMovieDbController],
+    providers: [
+        TheMovieDbService,
+        ApiAuthService,
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: CacheInterceptor,
+        },
+        CinematorLogger
+    ],
 })
-export class TheMovieDbModule {}
+export class TheMovieDbModule { }
