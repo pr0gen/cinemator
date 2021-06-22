@@ -42,19 +42,25 @@ export default {
         return
       }
 
-      const response = await this.$axios.post('http://localhost:3000/auth/login', {
+      this.$axios.post('http://localhost:3000/auth/login', {
         "username": this.username,
         "password": this.password
       })
-
-
-      if (response.status === 201) {
-          this.$store.dispatch('authentication/loadToken', response.data.token)
-          this.$router.push({path: '/'})
-          return
-      }
-      this.error.show = true
-      this.error.message = "Error"
+        .then((response) => {
+          if (response.status === 201) {
+            this.$store.dispatch('authentication/loadToken', response.data.token)
+            this.$store.dispatch('authentication/loadId', response.data.id)
+            this.$store.dispatch('authentication/loadUsername', response.data.username)
+            this.$router.push({path: '/'})
+            return
+          }
+          this.error.show = true
+          this.error.message = "Error"
+        })
+        .catch((error) => {
+          this.error.show = true
+          this.error.message = "Invalid login"
+        })
 
     },
   }

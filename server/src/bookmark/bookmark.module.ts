@@ -7,26 +7,28 @@ import { BookmarkService } from './bookmark.service';
 import { BookmarkController } from './bookmark.controller';
 import { Bookmark } from './bookmark.entity';
 import { UsersModule } from '../users/users.module';
+import { CinematorLogger } from '../logger/logger';
 
 @Module({
 
-  imports: [
-    TypeOrmModule.forFeature([Bookmark]),
-    CacheModule.register(),
-    ConfigModule.forRoot(),
-    UsersModule
-  ],
-  providers: [
-    BookmarkService,
-    ApiAuthService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: CacheInterceptor,
-    },
-  ],
-  exports: [BookmarkService],
-  controllers: [BookmarkController],
+    imports: [
+        TypeOrmModule.forFeature([Bookmark]),
+        CacheModule.register(),
+        ConfigModule.forRoot(),
+        UsersModule
+    ],
+    providers: [
+        BookmarkService,
+        ApiAuthService,
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: CacheInterceptor,
+        },
+        CinematorLogger
+    ],
+    exports: [BookmarkService],
+    controllers: [BookmarkController],
 
 })
-export class BookmarkModule {}
+export class BookmarkModule { }
 
