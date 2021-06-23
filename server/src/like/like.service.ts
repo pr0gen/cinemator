@@ -25,6 +25,7 @@ export class LikeService {
         const userId = like.ownerId;
         return UserLike.findByFilmIdAndOwner(userId, filmId)
             .then(like => {
+              console.error('like:', like);
                 if (undefined === like) {
                     return this.createLike(userId, filmId);
                 }
