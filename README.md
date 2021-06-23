@@ -54,7 +54,6 @@ works aswell for client app :
 ```Make ex-client```
 
 as ROOT :
-
 ```Make exa-server (or client like below)```
 
 the container mysql is reachable too with 

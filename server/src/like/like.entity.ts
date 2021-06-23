@@ -2,7 +2,7 @@ import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 't
 import { User } from '../users/user.entity';
 
 export interface InputLike {
-    owner: string;
+    ownerId: number;
     filmId: number;
 }
 
@@ -26,10 +26,10 @@ export class UserLike extends BaseEntity {
             .getMany();
     }
 
-    public static findByFilmIdAndOwner(filmId: number, owner: number): Promise<UserLike> {
+    public static findByFilmIdAndOwner(ownerId: number, filmId: number): Promise<UserLike> {
         return this.createQueryBuilder("user_like")
-            .where("user_like.owner = :owner", { owner: owner })
-            .andWhere("user_like.filmId = :filmId", { filmId: filmId })
+            .where("user_like.filmId = :filmId", { filmId: filmId })
+            .andWhere("user_like.ownerId = :ownerId", { ownerId: ownerId})
             .getOne();
     }
 

@@ -73,15 +73,14 @@ PUT localhost:3000/users/update/password
 ```
 POST localhost:3000/bookmark/create
 {
-  "name": "avenger",
+  "filmId": 1771,
   "owner": "Tigran"
 }
-
 ```
 
 ### Get bookmarks for user
 ```
-GET localhost:3000/bookmark/owner?owner=Tigran
+GET localhost:3000/bookmark/owner?ownerId=1
 ```
 
 ### Delete bookmark by filmId 
@@ -95,8 +94,12 @@ DELETE localhost:3000/bookmark?id=
 ```
 PUT localhost:3000/like/update 
 {
-  "owner": "Tigran",
+  "ownerId": 1,
   "filmId": 1
 }
 ```
 
+### Get like 
+```
+GET localhost:3000/like/owner?ownerId=1
+```

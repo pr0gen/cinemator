@@ -42,7 +42,6 @@ export default {
         return
       }
 
-
       this.$axios.post('http://localhost:3000/auth/login', {
         "username": this.username,
         "password": this.password
@@ -62,7 +61,6 @@ export default {
           this.error.show = true
           this.error.message = "Invalid login"
         })
-
 
     },
   }
