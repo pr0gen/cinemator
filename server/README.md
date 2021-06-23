@@ -80,7 +80,7 @@ POST localhost:3000/bookmark/create
 
 ### Get bookmarks for user
 ```
-GET localhost:3000/bookmark/owner?owner=Tigran
+GET localhost:3000/bookmark/owner?ownerId=1
 ```
 
 ### Delete bookmark by filmId 

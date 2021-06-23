@@ -28,14 +28,14 @@ export class BookmarkController {
 
     @UseGuards(JwtAuthGuard)
     @Get('owner')
-    public async get_bookmarks(@Query('owner') owner: string): Promise<Bookmark[]> {
-        return this.bookmarkService.findByOwner(owner)
+    public async get_bookmarks(@Query('ownerId') ownerId: number): Promise<Bookmark[]> {
+        return this.bookmarkService.findByOwner(ownerId)
             .then(bookmarks => {
-                this.logger.log('[BOOKMARK FIND] for owner:' + owner);
+                this.logger.log('[BOOKMARK FIND] for owner:' + ownerId);
                 return Promise.resolve(bookmarks);
             })
             .catch(e => {
-                this.logger.error('[BOOKMARK FIND] Failed for owner:' + owner, e);
+                this.logger.error('[BOOKMARK FIND] Failed for owner:' + ownerId, e);
                 throw new InternalServerErrorException(e);
             });
     }

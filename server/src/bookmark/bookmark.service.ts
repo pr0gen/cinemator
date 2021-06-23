@@ -17,11 +17,8 @@ export class BookmarkService {
         return this.bookmarkRepository.find();
     }
 
-    public async findByOwner(owner: string): Promise<Bookmark[]> {
-        return this.userService.findOne(owner)
-            .then(user => {
-                return Bookmark.findByOwner(user.id);
-            });
+    public async findByOwner(ownerId: number): Promise<Bookmark[]> {
+        return Bookmark.findByOwner(ownerId);
     }
 
     public async createOne(newBookmark: InputBookmark): Promise<Bookmark> {
