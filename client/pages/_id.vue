@@ -38,7 +38,7 @@
         <button style="cursor:pointer" class="btn-classic" v-bind:class="{ like: isLiked }" @click="like"
                 v-if="isLoggedIn"> Like
         </button>
-        <button style="cursor:pointer" class="btn-classic" :class="{ active: isActive }" @click="bookmark; isActive = !isActive"
+        <button style="cursor:pointer" class="btn-classic" :class="{ active: isActive }" @click="bookmark"
                 v-if="isLoggedIn"> Bookmark
         </button>
 
@@ -92,9 +92,24 @@ export default {
           }
         })
         .then(response => {
-          const result = response.data.find(item => item.filmId === this.$route.params.id)
+          const result = response.data.find(item => item.filmId.toString() === this.$route.params.id)
           if(result !== undefined) {
             this.isLiked = true
+          }
+        })
+        .catch(error => {});
+
+      this.$axios.get(`http://localhost:3000/bookmark/owner?ownerId=${this.id}`,
+        {
+          "headers": {
+            'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          const result = response.data.find(item => item.filmId.toString() === this.$route.params.id)
+          if(result !== undefined) {
+            this.isActive = true
           }
         })
         .catch(error => {});
@@ -169,16 +184,52 @@ export default {
     },
 
     async bookmark() {
-
-      const {data: movies} = await this.$axios.get(`http://localhost:3000/bookmark/owner?owner=${this.username}`)
-
-      if (!movies.includes(this.movie.id)) {
+      if (!this.isActive) {
         const response = await this.$axios.post('http://localhost:3000/bookmark/create', {
           "filmId": this.movie.id,
-          "owner": this.username
+          "ownerId": this.id
+          },
+          {
+            "headers": {
+              'Authorization': `Bearer ${this.token}`,
+              'Content-Type': 'application/json'
+            }
+          }).then(response => {
+          if (response.status === 201) {
+            this.isActive = true;
+            return;
+          }
         })
+          .catch(error => {
+            Swal.fire(
+              'Like',
+              'Something bad happened',
+              'error'
+            );
+            return;
+          });
       } else {
-        const response = await this.$axios.delete(`http://localhost:3000/bookmark?id=${this.movie}`)
+        console.log(this.movie.id)
+        const response = await this.$axios.delete(`http://localhost:3000/bookmark?filmId=${this.movie.id}&ownerId=${this.id}`,
+        {
+          "headers": {
+          'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'application/json'
+          }
+        }).then(response => {
+          if (response.status === 200) {
+            this.isActive = false;
+            return;
+          }
+        })
+          .catch(error => {
+            Swal.fire(
+              'Like',
+              'Something bad 1 happened',
+              'error'
+            );
+            return;
+          });
       }
     },
   },

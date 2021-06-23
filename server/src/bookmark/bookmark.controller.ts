@@ -16,12 +16,12 @@ export class BookmarkController {
     @Post('create')
     public async create_user(@Body() newBookmark: InputBookmark): Promise<Bookmark> {
         return this.bookmarkService.createOne(newBookmark)
-            .then(bookmark => {
-                this.logger.log('[BOOKMARK CREATE] for owner:' + newBookmark.owner + 'filmId: ' + newBookmark.filmId);
+      .then((bookmark) => {
+                this.logger.log('[BOOKMARK CREATE] for owner:' + newBookmark.ownerId + 'filmId: ' + newBookmark.filmId);
                 return Promise.resolve(bookmark);
             })
             .catch(e => {
-                this.logger.error('[BOOKMARK CREATE] Failed for owner:' + newBookmark.owner + 'filmId: ' + newBookmark.filmId, e);
+                this.logger.error('[BOOKMARK CREATE] Failed for owner:' + newBookmark.ownerId + 'filmId: ' + newBookmark.filmId, e);
                 throw new InternalServerErrorException(e);
             });
     }
@@ -42,8 +42,8 @@ export class BookmarkController {
 
     @UseGuards(JwtAuthGuard)
     @Delete()
-    public async delete_bookmark(@Query('filmId') id: number): Promise<DeleteResult> {
-        return this.bookmarkService.removeBookmark(id)
+    public async delete_bookmark(@Query('filmId') id: number, @Query('ownerId') ownerId: number): Promise<DeleteResult> {
+        return this.bookmarkService.removeBookmark(id,ownerId)
             .then(bookmarks => {
                 this.logger.log('[BOOKMARK DELETE] id: ' + id);
                 return Promise.resolve(bookmarks);

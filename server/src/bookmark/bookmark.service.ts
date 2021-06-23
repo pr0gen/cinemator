@@ -22,18 +22,14 @@ export class BookmarkService {
     }
 
     public async createOne(newBookmark: InputBookmark): Promise<Bookmark> {
-        return this.userService.findOne(newBookmark.owner)
-            .then(user => {
-                return this.bookmarkRepository.save({
-                    filmId: newBookmark.filmId, // TODO check this
-                    owner: user.id,
-                });
-
-            });
+        return this.bookmarkRepository.save({
+            filmId: newBookmark.filmId, // TODO check this
+            owner: newBookmark.ownerId,
+        });
     }
 
-    public async removeBookmark(id: number): Promise<DeleteResult> {
-        return Bookmark.removeBookmark(id);
+    public async removeBookmark(id: number, ownerId: number): Promise<DeleteResult> {
+        return Bookmark.removeBookmark(id, ownerId);
     }
 
 }

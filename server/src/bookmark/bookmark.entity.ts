@@ -3,7 +3,7 @@ import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, DeleteRe
 
 export interface InputBookmark {
     filmId: number;
-    owner: string;
+    ownerId: number;
 }
 
 @Entity()
@@ -26,10 +26,11 @@ export class Bookmark extends BaseEntity {
             .getMany();
     }
 
-    static removeBookmark(id: number): Promise<DeleteResult> {
+    static removeBookmark(id: number, ownerId: number): Promise<DeleteResult> {
         return this.createQueryBuilder("bookmark")
             .delete()
-            .where("bookmark.id = :id", { id })
+            .where("bookmark.filmId = :id", { id })
+            .andWhere("bookmark.ownerId = :ownerId", {ownerId})
             .execute();
     }
 }
