@@ -209,7 +209,6 @@ export default {
             return;
           });
       } else {
-        console.log(this.movie.id)
         const response = await this.$axios.delete(`http://localhost:3000/bookmark?filmId=${this.movie.id}&ownerId=${this.id}`,
         {
           "headers": {

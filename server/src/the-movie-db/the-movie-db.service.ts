@@ -41,8 +41,6 @@ export class TheMovieDbService {
     @UseInterceptors(CacheInterceptor)
     @CacheTTL(30)
     async find_movie_details(id: number): Promise<MovieDetails> {
-        console.log(ApiConstant.MOVIE_DETAILS + id + '/' + ApiConstant.API_KEY_PATH
-            + this.connection.api_key_the_movie_db + ApiConstant.LANG + "en-US");
         return this.httpService
             .get(
                 ApiConstant.MOVIE_DETAILS + id + ApiConstant.API_KEY_PATH
