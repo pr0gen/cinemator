@@ -35,10 +35,10 @@
 
         <b-rate :value="movie.vote_average / 2" custom-text="Vote Average"></b-rate>
 
-        <button class="btn-classic" v-bind:class="{ like: isLiked }" @click="like"
+        <button style="cursor:pointer" class="btn-classic" v-bind:class="{ like: isLiked }" @click="like"
                 v-if="isLoggedIn"> Like
         </button>
-        <button class="btn-classic" :class="{ active: isActive }" @click="bookmark; isActive = !isActive"
+        <button style="cursor:pointer" class="btn-classic" :class="{ active: isActive }" @click="bookmark; isActive = !isActive"
                 v-if="isLoggedIn"> Bookmark
         </button>
 
@@ -81,12 +81,34 @@ export default {
     }
   },
 
+  mounted() {
+
+    if (this.isLoggedIn) {
+      this.$axios.get(`http://localhost:3000/like/owner?ownerId=${this.id}`,
+        {
+          "headers": {
+            'Authorization': `Bearer ${this.token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          const result = response.data.find(item => item.filmId === this.$route.params.id)
+          if(result !== undefined) {
+            this.isLiked = true
+          }
+        })
+        .catch(error => {});
+
+    }
+
+  },
   data() {
     return {
       isLiked: false,
       isActive: false
     }
   },
+
 
   computed: {
     ...mapGetters('authentication', ['isLoggedIn', 'username', 'token', 'id'])
@@ -135,16 +157,13 @@ export default {
           this.isLiked = !this.isLiked;
           return;
         }
-          this.isLiked = this.isLiked;
       })
         .catch(error => {
-        console.log('Error');
             Swal.fire(
               'Like',
               'Something bad happened',
               'error'
             );
-            this.isLiked = this.isLiked;
             return;
         });
     },
@@ -161,10 +180,6 @@ export default {
       } else {
         const response = await this.$axios.delete(`http://localhost:3000/bookmark?id=${this.movie}`)
       }
-
-      console.log(this.movie.id)
-      console.log(this.username)
-
     },
   },
 
