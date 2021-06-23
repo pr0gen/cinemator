@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { InputLike, UserLike } from './like.entity';
 
@@ -10,14 +9,10 @@ export class LikeService {
     constructor(
         @InjectRepository(UserLike)
         private userLikeRepository: Repository<UserLike>,
-        private userService: UsersService,
     ) { }
 
-    public async findByOwner(owner: string): Promise<UserLike[]> {
-        return this.userService.findOne(owner)
-            .then(user => {
-                return UserLike.findByOwner(user.id);
-            });
+    public async findByOwner(ownerId: number): Promise<UserLike[]> {
+        return UserLike.findByOwner(ownerId);
     }
 
     public async updateLike(like: InputLike): Promise<boolean> {

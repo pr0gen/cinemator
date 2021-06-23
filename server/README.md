@@ -99,3 +99,7 @@ PUT localhost:3000/like/update
 }
 ```
 
+### Get like 
+```
+GET localhost:3000/like/owner?ownerId=1
+```
