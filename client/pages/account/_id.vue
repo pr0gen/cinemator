@@ -4,7 +4,7 @@
     <h1 class="title mt-6"> Update password </h1>
 
     <b-field label="Password">
-      <b-input type="password" v-model="password" @keyup.native="error.show = false" @keyup.native.enter="login"
+      <b-input type="password" v-model="password" @keyup.native="error.show = false" @keyup.native.enter="updatePassword"
                password-reveal></b-input>
     </b-field>
 
@@ -12,7 +12,7 @@
       {{ error.message }}
     </b-message>
 
-    <b-button type="button is-primary" @click="updatePassword">Connexion</b-button>
+    <b-button type="button is-primary" @click="updatePassword">Update</b-button>
 
     <h1 class="title mt-6">Delete account</h1>
 
@@ -74,11 +74,7 @@ export default {
               this.$router.push({path: '/'})
               return
             }
-            Swal.fire(
-              'Error',
-              'Token JWT not valid',
-              'error'
-            )
+
             this.error.show = true
             this.error.message = "Error"
           }).catch(error => {
