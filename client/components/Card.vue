@@ -1,5 +1,5 @@
 <template>
-  <article class='media' >
+  <article class='media' @click='show'>
     <figure class='media-left'>
       <p class='image is-64x64'>
         <b-skeleton v-if='!active' width='64px' height='64px'></b-skeleton>
@@ -9,7 +9,7 @@
 
     <div class='media-content'>
 
-      <div class='content' @click='show'>
+      <div class='content' >
         <p v-if='!active'>
           <b-skeleton active></b-skeleton>
           <b-skeleton height='80px'></b-skeleton>
@@ -18,12 +18,7 @@
           <p>{{ title }}</p>
           <p>{{ description }}</p>
         </span>
-
       </div>
-
-      <button class="btn-classic" v-if="isLoggedIn"> Like </button>
-      <button class="btn-classic" v-if="isLoggedIn"> Bookmark </button>
-
     </div>
   </article>
 
