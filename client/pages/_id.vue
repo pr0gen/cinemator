@@ -120,7 +120,7 @@ export default {
     },
 
     like() {
-      this.$axios.put(`localhost:3000/like/update`,
+      this.$axios.put(`http://localhost:3000/like/update`,
         {
           'ownerId': `${this.id}`,
           'filmId': this.movie.id
@@ -132,13 +132,6 @@ export default {
           }
         }).then(response => {
         if (response.status === 200) {
-          console.log('Hello');
-            
-          Swal.fire(
-            'Like',
-            'You liked',
-            'success'
-          );
           this.isLiked = !this.isLiked;
           return;
         }
