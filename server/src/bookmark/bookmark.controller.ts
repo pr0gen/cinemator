@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, InternalServerErrorException, Post, Query, UseGuards } from '@nestjs/common';
-import { CinematorLogger } from 'src/logger/logger';
+import { CinematorLogger } from '../logger/logger';
 import { DeleteResult } from 'typeorm';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { InputBookmark, Bookmark } from './bookmark.entity';

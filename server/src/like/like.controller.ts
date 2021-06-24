@@ -1,6 +1,6 @@
 import { Body, Controller, Get, InternalServerErrorException, Put, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CinematorLogger } from 'src/logger/logger';
+import { CinematorLogger } from '../logger/logger';
 import { InputLike, UserLike } from './like.entity';
 import { LikeService } from './like.service';
 

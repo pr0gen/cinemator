@@ -1,7 +1,7 @@
 import { CacheInterceptor, CacheTTL, Injectable, UseInterceptors } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BookmarkService } from 'src/bookmark/bookmark.service';
-import { LikeService } from 'src/like/like.service';
+import { BookmarkService } from '../bookmark/bookmark.service';
+import { LikeService } from '../like/like.service';
 import { DeleteResult, Repository } from 'typeorm';
 import { InputUser, ResetPassword, User } from './user.entity';
 
