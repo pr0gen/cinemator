@@ -140,21 +140,21 @@ Doc:
 
 - [x] Homepage:
      <p align="center">
-       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/home.gif" width="600" >
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/home.gif" width="900" >
     </p>
   
 - [x] create account:
    <p align="center">
-       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/create-account.gif" width="600" >
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/create-account.gif" width="900" >
    </p>
 - [x] login, update password, delete account :
    <p align="center">
-       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/update-user.gif" width="600" >
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/update-user.gif" width="900" >
    </p>
 
 - [x] Like and Bookmark :
    <p align="center">
-       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/like-and-bookmark.gif" width="600" >
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/like-and-bookmark.gif" width="900" >
    </p>
 
  
