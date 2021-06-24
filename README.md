@@ -165,7 +165,7 @@ Doc:
 | TypeScript     | Moyen         | Moyen          |  Moyen          |
 | Buefy          | Moyen         | Zero           |  Zero           |
 | Nest JS        | Zero          | Zero           |  Zero           |
-| Nuxt JS        | Leger         | Zero           |  Zero           |
+| Nuxt JS        | Faible        | Zero           |  Zero           |
 
 
 ### Nest.js
