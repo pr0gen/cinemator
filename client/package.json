@@ -18,10 +18,9 @@
     "sweetalert2": "^10.15.6"
   },
   "devDependencies": {
-    "fibers": "^5.0.0",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
-    "sass": "^1.32.8",
+    "sass": "1.32.13",
     "sass-loader": "10"
   }
 }

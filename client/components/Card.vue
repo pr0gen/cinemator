@@ -9,7 +9,7 @@
 
     <div class='media-content'>
 
-      <div class='content'>
+      <div class='content' >
         <p v-if='!active'>
           <b-skeleton active></b-skeleton>
           <b-skeleton height='80px'></b-skeleton>
@@ -18,15 +18,15 @@
           <p>{{ title }}</p>
           <p>{{ description }}</p>
         </span>
-
       </div>
-
     </div>
   </article>
 
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   props: {
     key: Number,
@@ -37,10 +37,14 @@ export default {
     image: String,
   },
 
+  computed: {
+    ...mapGetters('authentication', ['isLoggedIn'])
+  },
+
+
   methods: {
     show(){
       this.$router.push({path: '/' + this.id })
-      console.log('click movie');
     }
   }
 
@@ -56,6 +60,21 @@ export default {
   }
   .media {
     padding: 10px;
+  }
+
+  .btn-classic {
+    width: 80px;
+    background-color: #d4810b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: #d8c8b7 1px solid;
+    margin-right: 20px;
+  }
+
+  .btn-classic:active {
+    background-color: white;
+    color: #d4810b;
   }
 
 </style>
