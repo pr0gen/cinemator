@@ -30,7 +30,14 @@ export class Bookmark extends BaseEntity {
         return this.createQueryBuilder("bookmark")
             .delete()
             .where("bookmark.filmId = :id", { id })
-            .andWhere("bookmark.ownerId = :ownerId", {ownerId})
+            .andWhere("bookmark.ownerId = :ownerId", { ownerId })
+            .execute();
+    }
+
+    static removeBookmarkForUser(ownerId: number): Promise<DeleteResult> {
+        return this.createQueryBuilder("bookmark")
+            .delete()
+            .where("bookmark.ownerId = :ownerId", { ownerId })
             .execute();
     }
 }

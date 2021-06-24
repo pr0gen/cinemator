@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, ManyToOne, DeleteResult } from 'typeorm';
 import { User } from '../users/user.entity';
 
 export interface InputLike {
@@ -29,9 +29,17 @@ export class UserLike extends BaseEntity {
     public static findByFilmIdAndOwner(ownerId: number, filmId: number): Promise<UserLike> {
         return this.createQueryBuilder("user_like")
             .where("user_like.filmId = :filmId", { filmId: filmId })
-            .andWhere("user_like.ownerId = :ownerId", { ownerId: ownerId})
+            .andWhere("user_like.ownerId = :ownerId", { ownerId: ownerId })
             .getOne();
     }
+
+    public static removeByOwner(ownerId: number): Promise<DeleteResult> {
+        return this.createQueryBuilder("user_like")
+            .delete()
+            .where("user_like.ownerId = :ownerId", { ownerId })
+            .execute();
+    }
+
 
 }
 

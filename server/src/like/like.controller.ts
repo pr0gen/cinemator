@@ -19,8 +19,8 @@ export class LikeController {
                 this.logger.log('[UPDATE LIKE] ' + (b ? 'DELETE' : 'ADD') + '  owner: ' + like.ownerId + ' filmId: ' + like.filmId)
             })
             .catch(e => {
-                  this.logger.error('[UPDATE LIKE] Failed for owner: ' + like.ownerId + ' filmId: ' + like.filmId, e)
-                  throw new InternalServerErrorException('Failed to update your like');
+                this.logger.error('[UPDATE LIKE] Failed for owner: ' + like.ownerId + ' filmId: ' + like.filmId, e)
+                throw new InternalServerErrorException('Failed to update your like');
             });
     }
 

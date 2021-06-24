@@ -1,5 +1,7 @@
 import { CacheInterceptor, CacheTTL, Injectable, UseInterceptors } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { BookmarkService } from 'src/bookmark/bookmark.service';
+import { LikeService } from 'src/like/like.service';
 import { DeleteResult, Repository } from 'typeorm';
 import { InputUser, ResetPassword, User } from './user.entity';
 
@@ -9,6 +11,8 @@ export class UsersService {
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
+        private bookmarkService: BookmarkService,
+        private likeService: LikeService,
     ) { }
 
 
@@ -32,7 +36,17 @@ export class UsersService {
     }
 
     public async remove(id: number): Promise<DeleteResult> {
-        return this.usersRepository.delete(id);
+        console.log('delete bookmarks');
+        return this.bookmarkService.removeBookmarkForUser(id)
+            .then(_ => {
+                console.log('delete likes');
+
+                return this.likeService.removeForUser(id);
+            })
+            .then(_ => {
+                console.log('delete user');
+                return this.usersRepository.delete(id);
+            });
     }
 
     public async updatePassword(resetPassword: ResetPassword): Promise<User> {
