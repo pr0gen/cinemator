@@ -6,7 +6,6 @@ import { ConfigModule } from '@nestjs/config';
 import { BookmarkService } from './bookmark.service';
 import { BookmarkController } from './bookmark.controller';
 import { Bookmark } from './bookmark.entity';
-import { UsersModule } from '../users/users.module';
 import { CinematorLogger } from '../logger/logger';
 
 @Module({
@@ -15,7 +14,6 @@ import { CinematorLogger } from '../logger/logger';
         TypeOrmModule.forFeature([Bookmark]),
         CacheModule.register(),
         ConfigModule.forRoot(),
-        UsersModule
     ],
     providers: [
         BookmarkService,

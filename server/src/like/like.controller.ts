@@ -1,6 +1,6 @@
 import { Body, Controller, Get, InternalServerErrorException, Put, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CinematorLogger } from 'src/logger/logger';
+import { CinematorLogger } from '../logger/logger';
 import { InputLike, UserLike } from './like.entity';
 import { LikeService } from './like.service';
 
@@ -19,8 +19,8 @@ export class LikeController {
                 this.logger.log('[UPDATE LIKE] ' + (b ? 'DELETE' : 'ADD') + '  owner: ' + like.ownerId + ' filmId: ' + like.filmId)
             })
             .catch(e => {
-                  this.logger.error('[UPDATE LIKE] Failed for owner: ' + like.ownerId + ' filmId: ' + like.filmId, e)
-                  throw new InternalServerErrorException('Failed to update your like');
+                this.logger.error('[UPDATE LIKE] Failed for owner: ' + like.ownerId + ' filmId: ' + like.filmId, e)
+                throw new InternalServerErrorException('Failed to update your like');
             });
     }
 

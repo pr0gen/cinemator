@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, InternalServerErrorException, Post, Query, UseGuards } from '@nestjs/common';
-import { CinematorLogger } from 'src/logger/logger';
+import { CinematorLogger } from '../logger/logger';
 import { DeleteResult } from 'typeorm';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { InputBookmark, Bookmark } from './bookmark.entity';
@@ -16,7 +16,7 @@ export class BookmarkController {
     @Post('create')
     public async create_user(@Body() newBookmark: InputBookmark): Promise<Bookmark> {
         return this.bookmarkService.createOne(newBookmark)
-      .then((bookmark) => {
+            .then((bookmark) => {
                 this.logger.log('[BOOKMARK CREATE] for owner:' + newBookmark.ownerId + 'filmId: ' + newBookmark.filmId);
                 return Promise.resolve(bookmark);
             })
@@ -43,7 +43,7 @@ export class BookmarkController {
     @UseGuards(JwtAuthGuard)
     @Delete()
     public async delete_bookmark(@Query('filmId') id: number, @Query('ownerId') ownerId: number): Promise<DeleteResult> {
-        return this.bookmarkService.removeBookmark(id,ownerId)
+        return this.bookmarkService.removeBookmark(id, ownerId)
             .then(bookmarks => {
                 this.logger.log('[BOOKMARK DELETE] id: ' + id);
                 return Promise.resolve(bookmarks);

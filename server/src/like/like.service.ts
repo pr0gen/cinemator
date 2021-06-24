@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InputLike, UserLike } from './like.entity';
 
 @Injectable()
@@ -20,7 +20,6 @@ export class LikeService {
         const userId = like.ownerId;
         return UserLike.findByFilmIdAndOwner(userId, filmId)
             .then(like => {
-              console.error('like:', like);
                 if (undefined === like) {
                     return this.createLike(userId, filmId);
                 }
@@ -29,6 +28,10 @@ export class LikeService {
                 return Promise.resolve(true);
             })
             .catch(_ => this.createLike(userId, filmId));
+    }
+
+    public async removeForUser(ownerId: number): Promise<DeleteResult> {
+        return UserLike.removeByOwner(ownerId);
     }
 
     private async createLike(userId: number, filmId: number): Promise<boolean> {
