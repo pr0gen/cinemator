@@ -135,6 +135,28 @@ Doc:
    - GET: search a movie from expression
    - GET: get lang details of a movie
    - GET: movie description 
+
+### Front 
+
+- [x] Homepage:
+     <p align="center">
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/home.gif" width="600" >
+    </p>
+  
+- [x] create account:
+   <p align="center">
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/create-account.gif" width="600" >
+   </p>
+- [x] login, update password, delete account :
+   <p align="center">
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/update-user.gif" width="600" >
+   </p>
+
+- [x] Like and Bookmark :
+   <p align="center">
+       <img src="https://github.com/pr0gen/cinemator/blob/develop/images/like-and-bookmark.gif" width="600" >
+   </p>
+
  
 ## Nos niveaux dans ces langages et Frameworks
 |                | Arthur        |  Quentin       |  Tigran         |
