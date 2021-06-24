@@ -10,21 +10,10 @@
         <b-navbar-item href="#">
           Home
         </b-navbar-item>
-        <b-navbar-item href="#">
-          Documentation
-        </b-navbar-item>
-        <b-navbar-dropdown label="Info">
-          <b-navbar-item href="#">
-            About
-          </b-navbar-item>
-          <b-navbar-item href="#">
-            Contact
-          </b-navbar-item>
-        </b-navbar-dropdown>
       </template>
 
       <template #end>
-        <b-navbar-item tag="div">
+        <b-navbar-item tag="div" v-if="!isLoggedIn">
           <div class="buttons">
             <b-navbar-item  class="button is-light"tag="router-link" :to="{ path: '/login' }">
               <strong>Login</strong>
@@ -32,6 +21,17 @@
             <b-navbar-item  class="button is-primary"tag="router-link" :to="{ path: '/sign-up' }">
               <strong>Sign up</strong>
             </b-navbar-item>
+          </div>
+        </b-navbar-item>
+        <b-navbar-item tag="div" v-else>
+          <div class="buttons">
+            <b-navbar-item  class="button is-light"tag="router-link" :to="{ path: '/account' }">
+              <strong>Mon compte</strong>
+            </b-navbar-item>
+            <b-navbar-item  class="button is-light"  @click="logout">
+              <strong>Log out</strong>
+            </b-navbar-item>
+
           </div>
         </b-navbar-item>
       </template>
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   data () {
     return {
@@ -58,6 +60,15 @@ export default {
           to: { name: 'inspire' }
         }
       ]
+    }
+  },
+  computed: {
+    ...mapGetters('authentication', ['isLoggedIn'])
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('authentication/logout')
+      this.$router.push({path: '/'})
     }
   }
 }

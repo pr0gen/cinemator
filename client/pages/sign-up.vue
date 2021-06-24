@@ -73,21 +73,17 @@ export default {
       this.loading = true
       if (this.password === this.confirmPassword && this.password != '') {
         this.loading = true
-        // const {data: response} = await this.$axios.post('http://51.178.130.119:8081/register', {
-        //   "username": this.username,
-        //   "password": this.password,
-        //   "mail" : this.email
-        // })
 
-        const response = {
-          error:false
-        }
+        const response = await this.$axios.post('http://localhost:3000/users/create', {
+          "username": this.username,
+          "email": this.email,
+          "password": this.password
+        })
 
-        this.loading = false
-        if (response.error === false) {
+        if (response.status === 201) {
           Swal.fire({
             title: 'Your account has been created',
-            text: 'Please check your mailbox to validate your account.',
+            text: 'Thanks',
             icon: 'success',
             confirmButtonText: 'Great'
           }).then((result) => {

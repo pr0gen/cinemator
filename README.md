@@ -7,7 +7,7 @@
 - Docker-compose
 
 1. Make sure you follow [docker installation](https://docs.docker.com/engine/install/linux-postinstall/) to not have permission problems
-2. Make sure you don't run docker with sudo (it can cause permission issues)
+2. Make sure you don't run docker with sudo 
 
 ### Run projects
 - Start docker : 
