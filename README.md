@@ -27,10 +27,19 @@ docker-compose exec -T mysql mysql -uroot -proot cinemator < test_data.sql
 ```
 
 
-- Make sure you have this on your ```/etc/hosts``` file
+- Make sure you have this on your `/etc/hosts` file
 
 ```
 127.0.0.1	localhost
+```
+
+
+### Configuration: 
+BackEnd API keys in `server/.env` file:
+Retrieve API keys from respected services or ask the mainteners ! 
+```
+API_KEY_IMDB=
+API_KEY_THE_MOVIE_DB=
 ```
 
 ### Project access
@@ -43,21 +52,29 @@ server (URL) :
 http://localhost:3000/
 ```
 
-If you ran ``` make upd ``` you can use  ```docker-compose ps ``` to see the front URL
-or if you used ```make up``` the local URL will be given into the terminal.
+If you ran `make upd` you can use  `docker-compose ps` to see the front URL
+or if you used `make up` the local URL will be given into the terminal.
 
 ### Some commands
 Connect to docker appServer container : 
-```Make ex-server```
+```
+Make ex-server
+```
 
 works aswell for client app :
-```Make ex-client```
+```
+Make ex-client
+```
 
 as ROOT :
-```Make exa-server (or client like below)```
+```
+Make exa-server (or client like below)
+```
 
 the container mysql is reachable too with 
-```make mysql```
+```
+make mysql
+```
 
 ## Description du projet
 
@@ -84,6 +101,10 @@ nous sert de base de données pour enregistrer nos utilisateurs.
 
 Enfin un service [Redis](https://redis.io/) qui nous permet la gestion du cache
 avec Nest.js
+
+Doc:
+  - [Backend](https://github.com/pr0gen/cinemator/tree/main/server)
+  - [FrontEnd](https://github.com/pr0gen/cinemator/tree/main/client)
 
 ## Features
   
@@ -159,4 +180,13 @@ de base VueJS, Vue Router, Vuex, Vue Server Renderer et Vue-Meta pour un bundle
 qui s’élève à seulement 60k et le tout sans aucune configuration.
 
 ## Conclusion
+
+Nos retours d'expérience sur les différentes technos:
+
+> Docker c'est bien mais c'est chiant à configurer et mettre en place. ~ Quentin
+
+> NestJS, le framework est très bien mais le TypeScript pour faire une API,
+> c'est bancale parce que ce n'est pas fortement typé. ~ Tigran
+
+> NuxtJS, rapide et peu de config à mettre. Developper friendly. ~ Arthur 
 
