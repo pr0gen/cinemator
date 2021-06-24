@@ -38,15 +38,8 @@ export class UsersService {
     public async remove(id: number): Promise<DeleteResult> {
         console.log('delete bookmarks');
         return this.bookmarkService.removeBookmarkForUser(id)
-            .then(_ => {
-                console.log('delete likes');
-
-                return this.likeService.removeForUser(id);
-            })
-            .then(_ => {
-                console.log('delete user');
-                return this.usersRepository.delete(id);
-            });
+            .then(_ => this.likeService.removeForUser(id))
+            .then(_ => this.usersRepository.delete(id));
     }
 
     public async updatePassword(resetPassword: ResetPassword): Promise<User> {

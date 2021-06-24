@@ -20,7 +20,6 @@ export class LikeService {
         const userId = like.ownerId;
         return UserLike.findByFilmIdAndOwner(userId, filmId)
             .then(like => {
-                console.error('like:', like);
                 if (undefined === like) {
                     return this.createLike(userId, filmId);
                 }
@@ -32,7 +31,7 @@ export class LikeService {
     }
 
     public async removeForUser(ownerId: number): Promise<DeleteResult> {
-          return UserLike.removeByOwner(ownerId);
+        return UserLike.removeByOwner(ownerId);
     }
 
     private async createLike(userId: number, filmId: number): Promise<boolean> {
